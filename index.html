@@ -6,6 +6,8 @@
     <title>Welcome to Firebase Hosting</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
    <style>
     *{
       margin:0;
@@ -28,29 +30,19 @@
     .mylogo{
       display:flex;
       flex-wrap: wrap;
-      margin-left:30px;
     }
     .mylogo img{
-      margin-top:10px;
+      margin-top:6px;
     }
     .help{
       display:flex;
       flex-wrap: wrap;
-    }
-    /* .help button{
-       width:100px;
-        height:60px;
-        background:none;
-        border:0;
-        color:white;
-    } */
-    .help{
-        text-decoration:none;
+      text-decoration:none;
         color:white;
         font-size:13px;
         font-weight:400;
         font-family: "Helvetica Neue"-apple-systemBlinkMacSystemFont"Segoe UI"RobotoOxygenUbuntuCantarell"Fira Sans""Droid Sans"sans-serif;
-      }
+    }
       .help button:hover{
         background-color:white;
         color: #ed017f;
@@ -58,11 +50,15 @@
     .navbars{
       display: flex;
       flex-wrap: wrap;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
     }
     .searchInput{
-      margin-top:10px;
       display: flex;
       flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
     }
     
      .searchInput input{
@@ -108,7 +104,6 @@
         align-items:center;
         justify-content:space-around;
         background-color:#33b27b;
-        margin-left:10px;
       }
       .mycart button{
         width:25px;
@@ -128,7 +123,6 @@
         width:90px;
         height:60px;
        display: flex;
-       margin-left:10px;
        align-items: center;
         position: relative;
       }
@@ -322,7 +316,7 @@
       #categoriesdropdown{
         width:20%;
         height:70vh;
-        background-color:#b5b2ac7c;
+        background-color:#f2f2f2;
         position: absolute;
         left:0;
         right:0;
@@ -726,6 +720,10 @@
         width:100%;
         height:100vh;
          background-color:white;
+         overflow-y:scroll;
+      }
+      #menus::-webkit-scrollbar{
+        display:none;
       }
       #logsign{
         width:100%;
@@ -832,7 +830,7 @@
         flex-wrap: wrap;
         justify-content:center;
         align-items: center;
-        padding-top:90px;
+        padding-top:100px;
       }
       #icons{
         width:100%;
@@ -888,17 +886,18 @@
         width:250px;
         height:300px;
       margin-top:30px;
-      box-shadow:2px 2px  rgba(0, 0, 0, 0.24);
+      box-shadow:1px 1px  1px 1px rgba(0, 0, 0, 0.24);
       display: flex;
         flex-wrap: wrap;
         align-items: center;
         justify-content:space-around;
         
       }
-      /* #myall:hover{
-        transform: scale(1.1);
+      #myall:hover{
+        box-shadow:2px 2px 3px 3px rgba(0, 0, 0, 0.24);
+        /* transform: scale(1.1); */
         transition:all 1s;
-      } */
+      }
       #myall img{
         width:150px;
         height:100px;
@@ -919,11 +918,19 @@
       #myall button{
         width:88%;
         height:50px;
-        background-color: #33b27b;
-        border:0;
+        background: none;
+        border-radius:6px;
+        border:1px solid #ed017f;
         font-size:20px;
         font-weight:500;
-        color:white;
+        color:#ed017f;
+        font-size:14px;
+        font-weight: 400;  
+        font-family: "Helvetica Neue", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", sans-serif;
+         }
+      #myall button:hover {
+        background-color: #ed017f;
+        color: #ffffff;
       }
 
       #nav5{
@@ -934,6 +941,7 @@
         background-color:#ffffff;
         box-shadow:3px 3px 3px 3px rgba(0, 0, 0, 0.164);
         display:none;
+        z-index:1;
       }
       #menu{
         display: flex;
@@ -941,11 +949,10 @@
         align-items: center;
       }
       #menu button{
+        height:60px;
         background: none;
         border:0;
-        text-align: center;
         line-height:7px;
-        margin-top:10px;
       }
       #menu button:focus-within{
         color: #ed017f;
@@ -1225,6 +1232,38 @@
     margin: 0px 7px;
     /* background-color: aqua; */
 }
+#menucatego{
+        width:100%;
+        height:80vh;
+        box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.137);
+        margin-top:27px;
+      }
+      #menucatego div{
+        width:100%;
+        height:50px;
+        border-bottom:1px solid #b5b2ac;
+        display: flex;
+        align-items: center;
+        justify-content:space-between;
+        padding:10px;
+      }
+      #mancategories {
+        background-color: #1c1d1f;
+        display: flex;
+        align-items: center;
+        color:#1c1d1f;
+        justify-content:space-around;
+        padding:10px;
+      }
+      .contacts{
+        width:100%;
+        height:30vh;
+      }
+      .person{
+        display: flex;
+        flex-wrap: wrap;
+        margin-top:20px;
+      }
       
 
 
@@ -1376,6 +1415,31 @@
         height:30px;
       }
 }
+@media (max-width:879px){ 
+}
+@media (max-width:1034px){
+  #home{
+        padding:0px;
+      }
+      #computer{
+        padding:3;
+      }
+      #babything{
+        padding:0px;
+              }
+      #other{
+        padding:0px;
+              }
+              #phones{
+        padding:0px;
+              }
+      #electronic{
+        padding:0px;
+              }
+      #fashion{
+        padding:0;
+              }
+}
 @media (max-width:879px){
       .mylogo img{
         width:70px; 
@@ -1395,6 +1459,14 @@
         width:70px;
         height:60px;
       }
+      
+}
+@media (max-width:796px){
+  #selling{
+        width:30px;
+        height:60px;
+        line-height:10px;
+    }
 }
 @media (max-width:779px){
 .nav2{
@@ -1406,6 +1478,13 @@
       #categories{
         display:none;
       }
+     
+      #background{
+        width:100%;
+        height:100vh;
+        margin-top:60px;
+        
+      }
 }
 @media (max-width:434px){
   #input input{
@@ -1415,8 +1494,11 @@
 @media (max-width:575px){
 
   #nav5{
+    width:100%;
+        height:70px;
         display:block;
       }
+     
 }
 @media (max-width:516px){
   #myall{
@@ -1441,6 +1523,31 @@
         width:90%;
         height:50px;
        
+      }
+}
+
+@media (max-width:896px){
+  #login{
+      width:70px;
+      height:60px;
+      margin-left:5px;
+      padding-left:10px;
+  }
+}
+@media (max-width:1067px){
+  .store button{
+        width:60px;
+        height:60px;
+            }
+}
+@media (max-width:787px){
+  .searchInput input{
+        height:40px;
+        width:250px;
+      }
+      .searchInput button{
+         width:30px;
+         height:40px;
       }
 }
 /* media query */
@@ -1512,7 +1619,7 @@
               <img src="https://www.konga.com/_next/static/images/62f8a0d88e07573b4d46735aa24f3f04.png" alt="" width="110px" height="40px">
               <div class="store">
                 <button>Store <br>locator</button>
-                <button>Sell on <br> konga</button>
+                <button id="selling">Sell on <br> konga</button>
                 </div>
               </div>
               <div class="searchInput">
@@ -2129,8 +2236,8 @@
           <div id="menus">
             <div id="allmenu">
             <div id="logsign">
-              <button>Login</button>
-              <button>Signup</button>
+              <button onclick="logins()">Login</button>
+              <button onclick="signup()">Signup</button>
             </div>
             <div id="location">
 
@@ -2162,10 +2269,63 @@
               <b>Physical stores</b><br>
             <small>Store around you</small>
             </div>
+
+          </div>
+          
+              </div>
+              <div id="menucatego">
+                <div id="mencategories">
+                Categories
+            </div>
+
+            <div id="menaccesory">
+             Computer and Accessories
+             <span class="material-symbols-outlined">navigate_next</span>
           </div>
 
+          <div id="menphone">
+            Phones and Tablets
+            <span class="material-symbols-outlined">navigate_next</span>
+         </div>
+
+         <div id="menkonga">
+         Konga Fashions
+         <span class="material-symbols-outlined">navigate_next</span>
+       </div>
+
+       <div id="menhome">
+       Home and Kitchen
+       <span class="material-symbols-outlined">navigate_next</span>
+     </div>
+
+     <div id="menbaby">
+     Baby,Kids and Toys
+     <span class="material-symbols-outlined">navigate_next</span>
+   </div>
+   <div id="menother">
+    Other Categories
+    <span class="material-symbols-outlined">navigate_next</span>
+  </div>
+  <div id="mengroce">
+    Groceries
+    <span class="material-symbols-outlined">navigate_next</span>
+  </div>
+  <div id="menintel">
+    Intel 11th Gen Campaign
+    <span class="material-symbols-outlined">navigate_next</span>
+  </div>
+
+  
               </div>
             </div>
+            <div class="contacts">
+              <div class="person">
+                <span class="material-symbols-outlined">
+                  call
+                  </span>
+                  Contact us
+              </div>
+              </div>
             </div>
        
             <div id="input">
@@ -2295,7 +2455,7 @@
               </div>
 
 
-              <button class="carousel-control-prev"  type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+              <!-- <button class="carousel-control-prev"  type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
               </button>
@@ -2303,7 +2463,7 @@
               <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
-              </button>
+              </button> -->
             </div>
       </div>
 
@@ -2537,6 +2697,25 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </html>
 <script>
+    
+       
+  const firebaseConfig = {
+apiKey: "AIzaSyAzC7CPem2IWLFRfOx_RNesV-YAtLQN-E8",
+authDomain: "kongaproject-4ab26.firebaseapp.com",
+projectId: "kongaproject-4ab26",
+storageBucket: "kongaproject-4ab26.appspot.com",
+messagingSenderId: "226093515382",
+appId: "1:226093515382:web:04b3293079ef67b8705557"
+};
+
+  // Initialize Firebase
+  const app = firebase.initializeApp(firebaseConfig);
+  var provider = new firebase.auth.GoogleAuthProvider();
+  
+  const appVerifier = window.recaptchaVerifier;
+</script>
+x
+<script>
  let menus = document.getElementById('menus')
  let cancel = document.getElementById('cancel')
  let closes = document.getElementById('close')
@@ -2607,9 +2786,9 @@
                     <div><h3>${element.title}</h3>
                     <h1> $${element.price}</h1> 
                     <p>${element.category}</p> 
-                    <button onclick="showModal()">Show more</button>
                     </div>
                 </div>
+                <button onclick="showModal()">Add to Cart</button>
               </div>
             `
         });
@@ -2621,5 +2800,13 @@
     login.addEventListener('click', function(){
       window.location.href = 'signup.html'
     })
+    
+function signup() {
+  window.location.href ='signup.html'
+}
+function logins() {
+  window.location.href ='login.html'
+}
+
 
 </script>

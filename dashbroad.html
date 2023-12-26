@@ -30,29 +30,16 @@
     .mylogo{
       display:flex;
       flex-wrap: wrap;
-      margin-left:30px;
     }
     .mylogo img{
-      margin-top:10px;
+      margin-top:6px;
     }
     .help{
       display:flex;
       flex-wrap: wrap;
+      
     }
-    /* .help button{
-       width:100px;
-        height:60px;
-        background:none;
-        border:0;
-        color:white;
-    } */
-    .help{
-        text-decoration:none;
-        color:white;
-        font-size:13px;
-        font-weight:400;
-        font-family: "Helvetica Neue"-apple-systemBlinkMacSystemFont"Segoe UI"RobotoOxygenUbuntuCantarell"Fira Sans""Droid Sans"sans-serif;
-      }
+   
       .help button:hover{
         background-color:white;
         color: #ed017f;
@@ -60,11 +47,14 @@
     .navbars{
       display: flex;
       flex-wrap: wrap;
+      justify-content:space-around;
+      align-items: center;
     }
     .searchInput{
-      margin-top:10px;
       display: flex;
       flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
     }
     
      .searchInput input{
@@ -105,7 +95,6 @@
       .mycart{
         width:140px;
         height:45px;
-        margin-top:7px;
         display: flex;
         align-items:center;
         justify-content:space-around;
@@ -130,9 +119,9 @@
         width:90px;
         height:60px;
        display: flex;
-       margin-left:10px;
        align-items: center;
         position: relative;
+        color: #ffffff;
       }
       .down:hover{
         background-color: #ffffff;
@@ -244,7 +233,7 @@
         font-size:13px;
         font-weight:400;
         font-family: "Helvetica Neue"-apple-systemBlinkMacSystemFont"Segoe UI"RobotoOxygenUbuntuCantarell"Fira Sans""Droid Sans"sans-serif;
-        
+          color: #ffffff;
         display: flex;
         justify-content:space-around;
         align-items: center;
@@ -364,7 +353,7 @@
       #categoriesdropdown{
         width:20%;
         height:70vh;
-        background-color:#b5b2ac7c;
+        background-color:#f2f2f2;
         position: absolute;
         left:0;
         right:0;
@@ -777,15 +766,16 @@
       #logsign{
         width:100%;
         display: flex;
-        justify-content:space-around;
-        align-items: center;
+        justify-content:space-between;
        margin-top:20px;
       }
-      #logsign button{
-        width:45%;
-        height:40px;
-        background:none;
-        border:1px solid #ed017f;
+      #logsign h4{
+        text-align: cep;
+        font-size:12px;
+        font-weight:600;
+        font-family: "Helvetica Neue"-apple-systemBlinkMacSystemFont"Segoe UI"RobotoOxygenUbuntuCantarell"Fira Sans""Droid Sans"sans-serif;
+        color:#b1015f;
+        margin-left:25px;
       }
       .track{
         width:45%;
@@ -879,7 +869,7 @@
         flex-wrap: wrap;
         justify-content:center;
         align-items: center;
-        padding-top:90px;
+        padding-top:100px;
       }
       #icons{
         width:100%;
@@ -923,7 +913,7 @@
     
       #menucatego{
         width:100%;
-        height:90vh;
+        height:80vh;
         box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.137);
         margin-top:27px;
       }
@@ -951,7 +941,16 @@
         justify-content:space-around;
         padding:10px;
       }
-      #ddcategories b{
+      .contacts{
+        width:100%;
+        height:30vh;
+      }
+      .person{
+        display: flex;
+        flex-wrap: wrap;
+        margin-top:20px;
+      }
+            #ddcategories b{
         width:90%;
         text-align: center;
       }
@@ -1006,6 +1005,7 @@
         background-color:#ffffff;
         box-shadow:3px 3px 3px 3px rgba(0, 0, 0, 0.164);
         display:none;
+        z-index:1;
       }
       #menu{
         display: flex;
@@ -1013,11 +1013,10 @@
         align-items: center;
       }
       #menu button{
+        height:60px;
         background: none;
         border:0;
-        text-align: center;
         line-height:7px;
-        margin-top:10px;
       }
       #menu button:focus-within{
         color: #ed017f;
@@ -1296,6 +1295,30 @@
       border-radius:10px;
     }
 
+    #myid{
+     margin-left:10px;
+    }
+    #myid h1{
+      font-size:14px;
+      font-weight:700;
+      color: #1c1d1f;
+      font-family:"Helvetica Neue", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", sans-serif;
+    }
+    #myid p{
+      font-size:12px;
+      font-weight:400;
+      color: #1c1d1f;
+      font-family:"Helvetica Neue", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", sans-serif;
+    }
+    .location h4{
+     
+      font-size:12px;
+      font-weight:600;
+      color:#b1015f;
+      font-family:"Helvetica Neue", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", sans-serif;
+    }
+    
+    
 
 /* media query */
 @media (max-width : 1115px){
@@ -1393,31 +1416,27 @@
         padding:3px;
               }
 }
-@media (max-width:1017px){
-  #butts{
-        color: #ffffff;
-      width:140px;
-      }
-      #home{
-        padding:5px;
+@media (max-width:1034px){
+  #home{
+        padding:0px;
       }
       #computer{
-        padding:5px;
+        padding:3;
       }
       #babything{
-       display:none;
+        padding:0px;
               }
       #other{
-        display:none;
+        padding:0px;
               }
               #phones{
-        padding:5px;
+        padding:0px;
               }
       #electronic{
-        padding:5px;
+        padding:0px;
               }
       #fashion{
-        padding:5px;
+        padding:0;
               }
 }
 @media (max-width:800px) {
@@ -1523,9 +1542,6 @@
         height:100vh;
         margin-top:60px;
       }
-      #myproduct button{
-
-      }
 }
 @media (max-width:896px){
     .store button{
@@ -1539,6 +1555,14 @@
         height:60px;
     }
 }
+@media (max-width:816px){
+   #selling{
+        width:30px;
+        height:60px;
+        line-height:10px;
+    }
+}
+
 @media (max-width:796px){
     #selling{
         width:30px;
@@ -1561,6 +1585,8 @@
 @media (max-width:575px){
 
   #nav5{
+       width:100%;
+        height:70px;
         display:block;
       }
 }
@@ -1587,6 +1613,30 @@
         width:100px;
         height:100px;
 
+      }
+}
+@media (max-width:896px){
+  #login{
+      width:70px;
+      height:60px;
+      margin-left:5px;
+      padding-left:10px;
+  }
+}
+@media (max-width:1067px){
+  .store button{
+        width:60px;
+        height:60px;
+            }
+}
+@media (max-width:787px){
+  .searchInput input{
+        height:40px;
+        width:250px;
+      }
+      .searchInput button{
+         width:30px;
+         height:40px;
       }
 }
 
@@ -2278,12 +2328,15 @@
 
           <div id="menus">
             <div id="allmenu">
+              <div id="myid">
+                <h1 id="name"></h1>
+                <p id="myemail"></p>
+              </div>
             <div id="logsign">
-              <button>Login</button>
-              <button>Signup</button>
+              <h4>Account Setting</h4>
             </div>
+            
             <div id="location">
-
               <div class="track">
                 <span  class="material-symbols-outlined">location_on</span>
                 <div>
@@ -2356,8 +2409,31 @@
     Intel 11th Gen Campaign
     <span class="material-symbols-outlined">navigate_next</span>
   </div>
+
+  
+              </div>
+              <div class="contacts">
+                <div class="person">
+                  <span class="material-symbols-outlined">
+                    call
+                    </span>
+                    Contact us
+                </div>
+                <div class="person">
+                  <span class="material-symbols-outlined">
+                    person_cancel
+                    </span>
+                    Delete Account
+                </div>
+                <div id="loged" class="person">
+                  <span class="material-symbols-outlined">
+                    move_item
+                    </span>
+                    LogOut
+                </div>
               </div>
             </div>
+            
             </div>
        
             <div id="input">
@@ -2833,15 +2909,14 @@ appId: "1:226093515382:web:04b3293079ef67b8705557"
 
     dispAllProd()
 
-    // function showModal() {
-    //     modal.style.display = "flex"
-    //    products.forEach(el =>{
-    //     modal.innerHTML += `<img src="${el.images[0]}" /> `
-    //    })
-    // }
+    myproduct.addEventListener('click',function(){
+      window.location.href = 'seemorepage.html'
+    })
+   
 
     let myname = document.getElementById('myname')
-
+    let name = document.getElementById('name')
+    let myemail = document.getElementById('myemail')
     function dispusers() {
     firebase.auth().onAuthStateChanged((user) => {
   if (user) {
@@ -2850,6 +2925,8 @@ appId: "1:226093515382:web:04b3293079ef67b8705557"
     var uid = user.uid;
     console.log(user)
     myname.innerHTML =`${user.displayName}`
+    name.innerHTML =`${user.displayName}`
+    myemail.innerHTML = `${user.email}`
     // ...
   } else {
     alert('you are not login ur page')
@@ -2870,5 +2947,24 @@ kangas.addEventListener('click', function () {
   console.log(error)
 });
 })
+
+let loged = document.getElementById('loged')
+
+loged.addEventListener('click', function () {
+  firebase.auth().signOut().then(() => {
+        alert('sign out')
+        window.location.href = 'index.html'
+}).catch((error) => {
+  alert('u can never log out')
+  console.log(error)
+});
+})
+
+function signup() {
+  window.location.href ='signup.html'
+}
+function login() {
+  window.location.href ='login.html'
+}
 
 </script>
