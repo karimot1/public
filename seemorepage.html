@@ -329,7 +329,7 @@
       }
       #butts{
         color: #ffffff;
-      width:160px;
+        width:160px;
       justify-content: center;
         align-items: center;
         height:50px;
@@ -959,7 +959,6 @@
         flex-wrap: wrap;
         justify-content: space-around;
         align-items: center;
-        box-shadow:0 0 3px 3px rgba(0, 0, 0, 0.164);
       }
       #HOME{
         display:flex;
@@ -979,6 +978,239 @@
         height:10vh;
       }
 
+      #alldata{
+        width:100%;
+        height:100vh;
+      }
+      #background2{
+        width:100%;
+        background-color:black;
+      }
+   
+.footer{
+    width: 100%;
+    height: fit-content;
+}
+.top{
+    width: 100%;
+    height: 13vh;
+    background-color: rgb(46,46,46);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.top-flex{
+    width: 95%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* background-color: aqua; */
+}
+.long{
+    display: flex;
+}
+.long button{
+    width: 110px;
+    height: 45px;
+    padding: 10px;
+    border: 0px;
+    background-color: rgb(237,1,127);
+    font-size: 15px;
+    color: white;
+    font-weight: bold;
+}
+.long input{
+    width: 250px;
+    height: 45px;
+    padding: 10px;
+    border: 0;
+    font-size: 18px;
+    font-family: 'Open Sans', sans-serif;
+    outline: none;
+}
+
+.email{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* background-color: blue; */
+}
+
+.icon{
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20px;
+}
+.text h2, .text1 h2{
+    margin-top: 12px;
+}
+.text p, .text1 p{
+    margin-top: -12px;
+}
+.text1{
+    display: block;
+    /* background-color: aqua; */
+}
+
+
+
+
+.bottom{
+    width: 100%;
+    height: 60vh;
+    background-color: rgb(12,12,12);
+    
+}
+.bottom-flex{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.flex{
+    width: 95%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40px;
+    /* align-items: center; */
+    /* background-color: aqua; */
+}
+.about{
+    width: 20%;
+    /* background-color: aqua; */
+}
+
+.about h2, .email h2, .about1 h2{
+    color: rgb(181,181,181);
+    font-size: 15px;
+    margin-bottom: 20px;
+}
+.about p, .email p, .about1 p{
+    font-size: 12px;
+    color: rgb(181,181,181);
+}
+.about p:hover, .about h2:hover{
+    color: white;
+}
+.allabout{
+    width: 65%;
+    /* background-color: aqua; */
+    display: flex;
+    justify-content: space-between;
+}
+.download{
+    margin: 0px, 0px, 60px, 0px;
+}
+.download h2{
+    color: rgb(181,181,181);
+    font-size: 15px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+.apple{
+    width: 150px;
+    height: 42px;
+    border-radius: 4px;
+    background-color: black;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    color: white;
+}
+.flex-apple{
+    width: 320px;
+    display: flex;
+    justify-content: space-between;
+    /* background-color: aqua; */
+
+}
+.apple span{
+    font-size: 10px;
+    
+}
+.apple h4{
+    font-size: 15px;
+    font-weight: bold;
+}
+.connect{
+    margin-top: 50px;
+}
+.icons{
+    width: 65%;
+    display: flex;
+    justify-content: space-between;
+    /* background-color: aqua; */
+}
+.circle{
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    background-color: rgb(51,51,51);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.circle:hover{
+    background-color: white;
+    cursor: pointer;
+}
+.facebook, .twitter, .youtube, .instagram{
+    color: white;
+    margin-top: 5px;
+}
+.facebook:hover, .twitter:hover{
+    color: rgb(56,82,154);
+}
+.twitter:hover{
+    color: rgb(3,164,236);
+}
+.instagram{
+    margin: 0;
+}
+.instagram:hover{
+   .f{
+    display: none;
+   }
+   .k{
+    display: block;
+   }
+}
+.youtube:hover{
+    color: rgb(247,0,0);
+}
+.f{
+    display: block;
+}
+.k{
+    display: none;
+}
+.last{
+    width: 100%;
+    /* background-color:   black; */
+    margin-top: 40px;
+}
+.copy{
+    width: 100%;
+    /* background-color: red; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.copy hr{
+    width: 39%;
+    color: white;
+    border: 1px solid white;
+}
+.copy p{
+    font-size: 12px;
+    color: rgb(136,155,136);
+    margin: 0px 7px;
+    /* background-color: aqua; */
+}
 
 
 
@@ -986,6 +1218,46 @@
 
 
 
+      /* media query */
+@media (max-width : 1115px){
+    .about1{
+        display: none;
+    }
+    .copy hr{
+        width: 37.7%;
+      }
+      
+  }
+  @media (max-width : 959px){
+    .long button{
+        width: 80px;
+        height: 40px;
+    }
+    .long input{
+        width: 200px;
+        height: 40px;
+    }
+    .copy hr{
+        width: 35%;
+      }
+  }
+  @media (max-width : 959px){
+    .bottom{
+        height: 70vh;
+    }
+    .copy hr{
+        width: 33%;
+      }
+  }
+ 
+  @media (max-width : 768px){
+    .footer{
+        display: none;
+    }
+    #background2{
+        display:none;
+    }
+  }
 
       @media (max-width:1115px){
     .searchInput input{
@@ -1117,6 +1389,14 @@
         height:40px;
       }
 }
+@media (max-width:920px){
+  #babything{
+    display:none;
+  }
+  #other{
+    display:none;
+  }
+}
 @media (max-width:919px){
   .mycart{
         width:100px;
@@ -1151,6 +1431,11 @@
 .nav2{
   display:none;
 }
+#background1{
+        width:100%;
+        height:40vh;
+
+      }
 .secondnavbar{
         display:block;
       }
@@ -1953,7 +2238,210 @@
 
               <div id="background1">
                 <div class="mybut">
-                <button   id="HOME" onclick="myhome()">Home<span class="material-symbols-outlined">navigate_next</span></button>
+                <button id="HOME" onclick="myhome()">Home<span class="material-symbols-outlined">navigate_next</span></button>
+              </div>
+              </div>
+
+              <div id="alldata">
+
+              </div>
+
+              <div id="background2">
+                <div class="footer">
+                  <div class="top">
+                      <div class="top-flex">
+                          <div class="email">
+          
+                              <div class="icon">
+                                  <iconify-icon icon="ion:mail" style="color: rgb(8,8,8);" width="20"></iconify-icon>
+                               </div>
+          
+                              <div class="text">
+                                  <h2>EMAIL SUPPORT</h2>
+                              <p>help@konga.com</p>
+                              </div>
+                 
+                          </div>
+          
+                          <div class="email">
+                              <div class="icon">
+                                  <iconify-icon icon="mdi:phone" style="color: rgb(8,8,8);" width="20"></iconify-icon>
+                               </div>
+          
+          
+                              
+                               <div class="text">
+                                  <h2>PHONE SUPPORT</h2>
+                                  <p>0708 063 5700, 01 888 3435</p>
+                               </div>
+              
+          
+                          </div>
+                         
+                          <div class="email">
+                              <div class="icon">
+                                  <iconify-icon icon="jam:whatsapp" style="color: rgb(8,8,8);" width="20"></iconify-icon>
+                               </div>
+          
+                               <div class="text">
+                                  <h2>WHATSAPP</h2>
+                                  <p>0907 0038 400, 0809 460 5555</p>
+                               </div>
+                  
+                          </div>
+          
+                          <div class="about1">
+                 <div class="text1">
+                  <h2>GET LATEST DEALS</h2>
+                  <p>Our best promotions sent to your inbox.</p>
+                       
+                 </div>
+                 
+                          </div>
+          
+                          <div class="long">
+                              <input required type="email" name="" id="" placeholder="Email Address"> <button>Subscribe</button>
+                          </div>
+                          
+                          
+          
+                           
+                          
+              
+                      </div>
+          
+          
+          
+                  </div>
+          
+                  <div class="bottom">
+                      <div class="bottom-flex">
+                          <div class="flex">
+                         
+                              <div class="allabout">
+                                  <div class="about">
+                                      <h2>ABOUT KONGA</h2>
+                          <p>Contact Us</p>
+                          <p>About Us</p>
+                          <p>Careers</p>
+                          <p>Our Blog</p>
+                          <p>Forum</p>
+                          <p>Terms & Conditions</p>
+                                  </div>
+                  
+                                  <div class="about">
+                                      <h2> PAYMENT</h2>
+                          <p>KongaPay</p>
+                          <p>Wallet</p>
+                          <p>Verve</p>
+                          <p>Mastercard</p>
+                          <p>Visa</p>
+                  
+                                  </div>
+                                 
+                                  <div class="about">
+                                      <h2>BUYING ON KONGA</h2>
+                          <p>Buyer Safety Centre</p>
+                          <p>FAQs</p>
+                          <p>Delivery</p>
+                          <p>Konga Return Policy</p>
+                          <p>Digital Services</p>
+                          <p>Bulk Purchase</p>
+                                  </div>
+                  
+                                  <div class="about">
+                                      <h2>MORE INFO</h2>
+                          <p>Site Map</p>
+                          <p>Track My Order</p>
+                          <p>Privacy Policy</p>
+                          <p>Authentic Items Policy</p>
+                         
+                                  </div>
+                  
+                                  <div class="about">
+                                      <h2>MAKE MONEY ON KONGA</h2>
+                          <p>Become a Konga Affiliate</p>
+                                
+                                  </div>
+                              </div>
+                              
+          
+          
+          
+          
+          
+              
+                              <div class="download">
+                                  <h2>DOWNLOAD & CONNECT WITH US</h2>
+                                  
+                                  <div class="flex-apple">
+                                      <div class="apple">
+                                          <iconify-icon icon="ic:outline-apple" style="color: white;" width="35"></iconify-icon>
+                                      <div class="text">
+                                          <span>Download on</span>
+                                      <h4>App Store</h4>
+                                      </div>
+                                      
+                                      </div>
+                                      <div class="apple">
+                                          <iconify-icon icon="ant-design:android-filled" style="color: white;" width="32"></iconify-icon> 
+                                       <div class="text">
+                                          <span>Download on</span>
+                                          <h4>Google Play</h4>
+                                       </div>
+                                      </div>
+                                  </div>
+                            
+              
+              
+                                  <div class="connect">
+                                      <h2>CONNECT WITH US</h2>
+                                  
+                                  <div class="icons">
+                                  <div class="circle">
+                                      <span class="facebook"><iconify-icon icon="ri:facebook-fill"  width="25"></iconify-icon></span>
+                                  </div>
+              
+                                  <div class="circle">
+                                      <span class="twitter"><iconify-icon icon="prime:twitter"  width="25"></iconify-icon></span>
+                                  </div>
+              
+                                  <div class="circle">
+                                      <span class="instagram">
+                                          <iconify-icon class="f" icon="bi:instagram"  width="25"></iconify-icon>
+                                          <iconify-icon class="k" icon="skill-icons:instagram"  width="25"></iconify-icon>
+                                      </span>
+                                      </div>
+              
+                                  <div class="circle">
+                                      <span class="youtube"><iconify-icon icon="ri:youtube-fill" width="30"></iconify-icon></span>
+                                  </div>
+                                      
+              
+                                  </div>
+                                  </div>
+              
+              
+              
+              
+                              </div>      
+                              
+                  
+                          </div>
+                      </div>
+                      
+                      <div class="last">
+                     
+                          <div class="copy">
+                              <hr>
+                              <p>Copyright © 2023 Konga.com. All rights reserved</p>
+                              <hr>
+                          </div>
+          
+                  </div>
+          
+                  </div>
+                  
               </div>
               </div>
          
@@ -1981,30 +2469,43 @@
     
     const appVerifier = window.recaptchaVerifier;
   </script>
-<script>
-    
-    let myname = document.getElementById('myname')
-    function dispusers() {
-    firebase.auth().onAuthStateChanged((user) => {
-  if (user) {
-    // User is signed in, see docs for a list of available properties
-    // https://firebase.google.com/docs/reference/js/v8/firebase.User
-    var uid = user.uid;
-    console.log(user)
-    myname.innerHTML =`${user.displayName}`
-    // ...
-  } else {
-    alert('you are not login ur page')
+<script >
+  
+let myname = document.getElementById('myname')
+function dispusers() {
+firebase.auth().onAuthStateChanged((user) => {
+if (user) {
+// User is signed in, see docs for a list of available properties
+// https://firebase.google.com/docs/reference/js/v8/firebase.User
+var uid = user.uid;
+console.log(user)
+myname.innerHTML =`${user.displayName.toUpperCase()}`
+// ...
+} else {
+alert('you are not login ur page')
 
-    window.location.href = 'login.html'
-  }
+window.location.href = 'login.html'
+}
 });
 }
 dispusers() 
+let kangas = document.getElementById('kangas')
+
+kangas.addEventListener('click', function () {
+  firebase.auth().signOut().then(() => {
+        alert('sign out')
+        window.location.href = 'index.html'
+}).catch((error) => {
+  alert('u can never log out')
+  console.log(error)
+});
+})
+
 function menu(){
-    window.location.href = 'dashbroad.html'
+window.location.href = 'dashbroad.html'
 }
 function myhome(){
-    window.location.href = 'dashbroad.html'
+window.location.href = 'dashbroad.html'
 }
 </script>
+<script src="seemore.js"></script>

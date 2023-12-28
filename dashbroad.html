@@ -967,7 +967,6 @@
       }
       #myall:hover{
         box-shadow:2px 2px 2px 2px  rgba(0, 0, 0, 0.24);
-        transform: scale(1.1);
         transition:all 1s;
       }
       #myall img{
@@ -990,12 +989,18 @@
       #myall button{
         width:88%;
         height:50px;
-        background-color: #33b27b;
-        border:0;
-        font-size:20px;
+       background:none;
+        border:1px solid #ed017f;
+        border-radius: 6px;
+        font-size:15px;
         font-weight:500;
-        color:white;
+        color:#ed017f;
       }
+      #myall button:hover{
+        background-color: #ed017f;
+        color:#ffffff;
+      }
+
 
       #nav5{
         width:100%;
@@ -2900,8 +2905,8 @@ appId: "1:226093515382:web:04b3293079ef67b8705557"
                     <p>${element.category}</p> 
                    
                     </div>
-                    <button onclick="showModal()">Show more</button>
                 </div>
+                <button onclick="showModal()">Add to cart</button>
               </div>
             `
         });
@@ -2924,7 +2929,7 @@ appId: "1:226093515382:web:04b3293079ef67b8705557"
     // https://firebase.google.com/docs/reference/js/v8/firebase.User
     var uid = user.uid;
     console.log(user)
-    myname.innerHTML =`${user.displayName}`
+    myname.innerHTML =`${user.displayName.toUpperCase()}`
     name.innerHTML =`${user.displayName}`
     myemail.innerHTML = `${user.email}`
     // ...
@@ -2968,3 +2973,5 @@ function login() {
 }
 
 </script>
+
+<script src="seemore.js"></script>
