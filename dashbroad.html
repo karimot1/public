@@ -954,7 +954,7 @@
         width:90%;
         text-align: center;
       }
-      #myall{
+      .myall{
         width:250px;
         height:300px;
       margin-top:30px;
@@ -965,28 +965,28 @@
         justify-content:space-around;
         
       }
-      #myall:hover{
+      .myall:hover{
         box-shadow:2px 2px 2px 2px  rgba(0, 0, 0, 0.24);
         transition:all 1s;
       }
-      #myall img{
+      .myall img{
         width:150px;
         height:100px;
       }
-      #myall h3{
+      .myall h3{
         font-size:15px;
         font-family: "Helvetica Neue", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", sans-serif;
         font-weight:500;
         color:#1c1d1f;
       }
-      #myall h1{
+      .myall h1{
         width:100%;
         font-size:20px;
         font-family: "Helvetica Neue", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", sans-serif;
         font-weight:700;
         color:#1c1d1f;
       }
-      #myall button{
+      .myall button{
         width:88%;
         height:50px;
        background:none;
@@ -996,7 +996,7 @@
         font-weight:500;
         color:#ed017f;
       }
-      #myall button:hover{
+      .myall button:hover{
         background-color: #ed017f;
         color:#ffffff;
       }
@@ -2871,53 +2871,58 @@ appId: "1:226093515382:web:04b3293079ef67b8705557"
 
 
 
- let todoId = localStorage.getItem("todoId");
-    console.log(todoId);
-    let allProducts = []
-    let products = [];
-    let screen = document.getElementById("screen");
-    let modal = document.getElementById("modal");
-    let myproduct = document.getElementById('myproduct')
-    // modal.style.display = "none"
+ let allProducts = [];
+        let products = [];
+        let myproduct = document.getElementById('myproduct');
 
-   
+        function fetchAllProducts() {
+            // Dummy API call
+            fetch('https://dummyjson.com/products').then((data) => data.json())
+                .then((res) => {
+                    allProducts = res.products;
+                    localStorage.setItem("allProd", JSON.stringify(allProducts))
+                    dispAllProd();
+                })
+        }
 
-    function fetchAllProducts() {
-        fetch('https://dummyjson.com/products').then((data) => data.json())
-            .then((res) => {
-                console.log(res.products);
-                allProducts = res.products;
-                localStorage.setItem("allProd", JSON.stringify(allProducts))
-            })
-    }
-    fetchAllProducts()
-    function dispAllProd() {
-        products = JSON.parse(localStorage.getItem("allProd"))
-        console.log(products);
-        products.forEach(element => {
-            myproduct.innerHTML += `
-                <div id='myall'>
-                  <div>
-                    <img src="${element.images[0]}" />  
-                    <div>
-                      <h3>${element.title}</h3>
-                    <h1> $${element.price}</h1> 
-                    <p>${element.category}</p> 
-                   
+        function dispAllProd() {
+            products = JSON.parse(localStorage.getItem("allProd"))
+            products.forEach(element => {
+                myproduct.innerHTML += `
+                    <div class="myall" onclick="myprod(event)" id='${element.id}'>
+                        <div>
+                            <img src="${element.images[0]}" />  
+                            <div>
+                                <h3>${element.title}</h3>
+                                <h1> $${element.price}</h1> 
+                                <p>${element.category}</p> 
+                            </div>
+                        </div>
+                        <button onclick="showModal()">Add to cart</button>
                     </div>
-                </div>
-                <button onclick="showModal()">Add to cart</button>
-              </div>
-            `
-        });
-    }
+                `;
+            });
+        }
 
-    dispAllProd()
+        function myprod(event) {
+            // Access the clicked element's ID
+            let productId = event.currentTarget.id;
+            console.log(productId);
 
-    myproduct.addEventListener('click',function(){
-      window.location.href = 'seemorepage.html'
-    })
-   
+            // Find the corresponding product object
+            let foundObj = products.find((obj) => {
+                return productId == obj.id;
+            });
+
+            // Store the found object in local storage
+            let todo  = JSON.parse(localStorage.getItem("foundObj"))
+            localStorage.setItem("foundObj", JSON.stringify(foundObj));
+
+            // Redirect to the "seemorepage.html" page
+            window.location.href = "seemorepage.html";
+        }
+
+        fetchAllProducts();
 
     let myname = document.getElementById('myname')
     let name = document.getElementById('name')
@@ -2974,4 +2979,4 @@ function login() {
 
 </script>
 
-<script src="seemore.js"></script>
+<!-- <script src="seemore.js"></script> -->
