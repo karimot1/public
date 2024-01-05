@@ -60,7 +60,25 @@
       justify-content: center;
       align-items: center;
     }
-    
+    .searchInputs{
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+    #drop{
+      height:80vh;
+        width:100%;
+        background-color: #ffffff;
+        overflow-y:scroll;
+        position: absolute;
+        top:40px;
+        display:none;
+    }
+    #drop::-webkit-scrollbar{
+      display: none;
+    }
      .searchInput input{
         height:40px;
         width:450px;
@@ -118,6 +136,9 @@
         width:20px;
         height:30px;
         background-color: #f6f6f6;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
       .down{
         width:90px;
@@ -210,6 +231,14 @@
       flex-wrap: wrap;
       height:20px;
     }
+    .span2{
+      display: flex;
+      flex-wrap: wrap;
+      height:20px;
+      align-items: center;
+      justify-content: space-around;
+      width:10%;
+    }
     .span button{
       background: none;
       border:0;
@@ -235,6 +264,10 @@
       justify-content: center;
       align-items: center;
       flex-wrap: wrap;
+      position: relative;
+    }
+    #input:focus-within #drop{
+      display:block;
     }
     #input input{
         height:40px;
@@ -1263,7 +1296,11 @@
         flex-wrap: wrap;
         margin-top:20px;
       }
-      
+      .butcart{
+        display: flex;
+        flex-wrap: wrap;
+        align-items:center;
+      }
 
 
     /* dropdown */
@@ -1595,8 +1632,13 @@
                 </div>
               </div>
               <div class="searchInput">
-                <input type="search"  placeholder="Search for product,brand and categories">
-                <button><img src="search.png" alt="" width="15px"></button>
+                <div class="searchInputs">
+                <input class="searcher" type="search" id="searchInput"  placeholder="Search for product,brand and categories">
+                <button ><img src="search.png" alt="" width="15px"></button>
+                  <div id="drop">
+
+                  </div>
+                </div>
                 </div>
              <div class="help">
               <div class="down">
@@ -1610,22 +1652,25 @@
               </div>
               <div id="login">Login/<br>Signup</div>
               </div>
-              <div class="mycart">
+              <div id="addtocartbut" class="mycart">
                 <div>
                 <img src="cart.png" alt="" width="30px" height="35px">
               <button id="mycart">My cart</button>
               </div>
-              <div id="addtocart"></div>
+              <div class="theCart" id="addtocart"></div>
+              <!-- <div id="cartDiv"></div>
+              <div id="cartAddText"></div>
+              <div id="categoryText"></div> -->
               </div>
            </div>
            </div>
 
            <div id="nav5">
             <div id="menu">
-            <button><span class="material-symbols-outlined">home</span> <br> Home</button>
+            <button onclick="home()"><span class="material-symbols-outlined">home</span> <br> Home</button>
             <button><span class="material-symbols-outlined">sell</span><br> Deals</button>
-            <button><span class="material-symbols-outlined">shopping_cart</span> <br> carts</button>
-            <button><span class="material-symbols-outlined">menu</span><br>more</button>
+            <button onclick="cartshopping()"><span class="material-symbols-outlined">shopping_cart</span> <br> carts</button>
+            <button onclick="mean()"><span class="material-symbols-outlined">menu</span><br>more</button>
             </div>
            </div>
       </main>
@@ -2202,7 +2247,7 @@
 
           <div class="span2">
            <button><span class="material-symbols-outlined">storefront</span></button>
-            <button><span class="material-symbols-outlined">shopping_cart</span></button>
+            <button  class="butcart"  onclick="cartshopping()"><span class="material-symbols-outlined">shopping_cart</span><span class="theCart"  style=" color:#33b27b; font-size:14px; font-weight: 600; border-radius:100px;"></span></button>
           </div>
 
           <div id="menus">
@@ -2301,8 +2346,13 @@
             </div>
        
             <div id="input">
-              <input type="search"  placeholder="Search for product,brand and categories">
+              <input class="searcher" type="search"  placeholder="Search for product,brand and categories">
               <button><img src="search.png" alt="" width="15px"></button>
+              
+              <div id="drop">
+
+              
+              </div>
             </div>
         </div>
         
@@ -2727,51 +2777,134 @@ appId: "1:226093515382:web:04b3293079ef67b8705557"
 
 
 
- let todoId = localStorage.getItem("todoId");
-    console.log(todoId);
-    let allProducts = []
-    let products = [];
+ 
     let screen = document.getElementById("screen");
-    let modal = document.getElementById("modal");
-    let myproduct = document.getElementById('myproduct')
-    // modal.style.display = "none"
+    let allProducts = [];
+        let products = [];
+        let myproduct = document.getElementById('myproduct');
 
-   
+        function fetchAllProducts() {
+            // Dummy API call
+            fetch('https://dummyjson.com/products').then((data) => data.json())
+                .then((res) => {
+                    allProducts = res.products;
+                    localStorage.setItem("allProd", JSON.stringify(allProducts))
+                    dispAllProd();
+                })
+        }
 
-    function fetchAllProducts() {
-        fetch('https://dummyjson.com/products').then((data) => data.json())
-            .then((res) => {
-                console.log(res.products);
-                allProducts = res.products;
-                localStorage.setItem("allProd", JSON.stringify(allProducts))
-            })
-    }
-    fetchAllProducts()
-    function dispAllProd() {
-        products = JSON.parse(localStorage.getItem("allProd"))
-        console.log(products);
-        products.forEach(element => {
-            myproduct.innerHTML += `
-                <div id='myall'>
-                  <div>
-                    <img src="${element.images[0]}" />  
-                    <div><h3>${element.title}</h3>
-                    <h1> $${element.price}</h1> 
-                    <p>${element.category}</p> 
+        function dispAllProd() {
+            products = JSON.parse(localStorage.getItem("allProd"))
+            products.forEach(element => {
+                myproduct.innerHTML += `
+                    <div id="myall" >
+                        <div>
+                            <img src="${element.images[0]}" />  
+                            <div>
+                                <h3>${element.title}</h3>
+                                <h1> N${element.price}</h1> 
+                                <p>${element.category}</p> 
+                                <button onclick="myprod(event)" id='${element.id}' style="border:0; background:none; line-height:13px; font-size:14; font-weight:600;">see more</button>
+                            </div>
+                        </div>
+                        <button onclick="showModal(event)">Add to cart</button>
                     </div>
-                </div>
-                <button onclick="showModal()">Add to Cart</button>
-              </div>
-            `
-        });
-    }
+                `;
+            });
+        }
 
-    dispAllProd()
+        function myprod(event) {
+            // Access the clicked element's ID
+            let productId = event.currentTarget.id;
+            console.log(productId);
+
+            // Find the corresponding product object
+            let foundObj = products.find((obj) => {
+                return productId == obj.id;
+            });
+
+            // Store the found object in local storage
+            // let todomore = JSON.parse(localStorage.getItem("foundObj"))
+            localStorage.setItem("foundObj", JSON.stringify(foundObj));
+
+            // Redirect to the "seemorepage.html" page
+            window.location.href = "seemorepage.html";
+        }
+
+        fetchAllProducts();
+
+
+
+                    //add to cart 
+        let cart = document.querySelectorAll(".theCart");
+
+let cartNum = localStorage.getItem("cartNo") || 0;
+
+let cartArray = JSON.parse(localStorage.getItem("cartArray")) || [];
+
+let cartDiv = document.getElementById('cartDiv')
+let categoryText = document.getElementById('cartegoryText')
+let cartAddText = document.getElementById('cartAddText')
+        function showModal(event){
+          cart.forEach((c) => {
+    ++cartNum;
+    localStorage.setItem("cartNo", cartNum);
+    displayCartNumber() 
+    el = event.target;
+    console.log(el.id);
+
+    let foundObj = products.find((obj) => {
+      return el.id == obj.id;
+    });
+
+    let item = {
+      itemImage: foundObj.images[0],
+      itemTitle: foundObj.title,
+      itemQuantity: 1,
+      get itemPrice() {
+        return foundObj.price * this.itemQuantity;
+      },
+      itemAmount: foundObj.price,
+    };
+
+    cartAddText.innerHTML = `You've added ${foundObj.title} to Cart`
+    categoryText.innerHTML = `${foundObj.category.toUpperCase()}`
+ 
+ cartDiv.style.left = '20px'
+ cartDiv.style.transition = '0.5s'
+ 
+ setTimeout(()=> {
+   cartDiv.style.left = '-250px'
+   cartDiv.style.transition = '0.5s'
+ }, 3000)
+
+    cartArray.push(item);
+    localStorage.setItem("cartArray", JSON.stringify(cartArray));
+    console.log(cartArray);
+  });
+        }
+
+        function displayCartNumber() {
+  cart.forEach((c) => {
+
+    c.innerHTML = cartNum;
+  });
+}
+displayCartNumber()
+
+
+
+
 
     let login = document.getElementById('login')
     login.addEventListener('click', function(){
-      window.location.href = 'signup.html'
+      setTimeout(()=> {
+        window.location.href = 'signup.html'
+ }, 3000)
+      
     })
+
+    
     
 function signup() {
   window.location.href ='signup.html'
@@ -2780,5 +2913,69 @@ function logins() {
   window.location.href ='login.html'
 }
 
+let addtocartbut = document.getElementById('addtocartbut')
+addtocartbut.addEventListener('click', function(){
+  window.location.href ='cart.html'
+})
+function cartshopping(){
+  window.location.href ='cart.html'
+}
+function mean() {
+  if (mymenus == 1) {
+    menus.style.display = 'none'
+    cancel.style.display = 'block'
+    closes.style.display = 'none'
+    mymenus = 0
+  } else {
+    menus.style.display = 'block'
+    closes.style.display = 'block'
+    cancel.style.display = 'none'
+    mymenus = 1
+  }
+}
+function home() {
+  window.location.href = 'index.html'
+}
+
+
+
+
+let search = document.querySelectorAll(".searcher");
+console.log(search);
+
+let dropdownSearch = document.getElementById("drop");
+
+search.forEach((s) => {
+  s.addEventListener("input", (event) => {
+    let sValue = event.target.value.toLowerCase();
+    let searched =  products.filter(({ title, category, brand }) => {
+      return (
+        title.toLowerCase().includes(sValue) ||
+        category.toLowerCase().includes(sValue) ||
+        brand.toLowerCase().includes(sValue)
+      );
+    });
+
+    if (searched.length == 0) {
+      dropdownSearch.innerHTML = "this product does not exist";
+    } else if (s.value.length > 0) {
+      dropdownSearch.innerHTML = "";
+      searched.forEach((data) => {
+        dropdownSearch.innerHTML += `<button id="${data.id}"  onclick="showProduct(event)" class="border border-success m-1 bg-light d-flex text-dark align-items-center justify-content-between  ;" style="height:40px; width:98%;" value='${data.price}'>
+       
+        <p style="text-align:left;" id="${data.id}" value='${data.price}'  class="h-100 d-flex align-items-center mt-3"> ${data.title} </p>
+        <p style="text-align:left; font-size:8px; width:120px;" id="${data.id}" value='${data.price}'  class="h-100 d-flex align-items-center mt-3"> ${data.category} </p>
+        <p style="text-align:left; font-size:5px; width:120px;" id="${data.id}" value='${data.price}'  class="h-100 d-flex align-items-center mt-3"> ${data.brand} </p>
+        <img style="width:20px; text-align:left; height;90%; " id="${data.id}" value='${data.price}'  src="${data.images[0]}"> </img>
+        
+        </button>`;
+      });
+    } else {
+      dropdownSearch.style.visibility = "hidden";
+    }
+  });
+});
+
 
 </script>
+<script src="seemore.js"></script>

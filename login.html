@@ -258,12 +258,12 @@ input::placeholder {
                   </div>
                 
                   <div class="login">
-                      <div class="login-google">
-                          <img src="apple.png" alt="">
+                      <div onclick="google()" class="login-google">
+                          <img src="g000.png" alt="">
                           <p>Login with Google</p>
                       </div>
       
-                      <div class="login-apple">
+                      <div onclick="apple()" class="login-apple">
                           <img src="google.png" alt="">
                           <p>Login with Apple</p>
                       </div>
@@ -347,8 +347,8 @@ appId: "1:226093515382:web:04b3293079ef67b8705557"
     // Initialize Firebase
     const app = firebase.initializeApp(firebaseConfig);
     var provider = new firebase.auth.GoogleAuthProvider();
+    var provider = new firebase.auth.OAuthProvider('apple.com');
     
-    const appVerifier = window.recaptchaVerifier;
   </script>
 <script>
      let email  = document.getElementById('email')
@@ -377,6 +377,60 @@ appId: "1:226093515382:web:04b3293079ef67b8705557"
 
 function sign() {
         window.location.href = 'signup.html'
+    }
+
+    function google(){
+      firebase.auth()
+  .signInWithPopup(provider)
+  .then((result) => {
+    /** @type {firebase.auth.OAuthCredential} */
+    var credential = result.credential;
+
+    // This gives you a Google Access Token. You can use it to access the Google API.
+    var token = credential.accessToken;
+    // The signed-in user info.
+    var user = result.user;
+    alert('successful')
+    console.log(result)
+  }).catch((error) => {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    // The email of the user's account used.
+    var email = error.email;
+    // The firebase.auth.AuthCredential type that was used.
+    var credential = error.credential;
+    console.log(error)
+  });
+    }
+    function apple() {
+        firebase.auth().signInWithPopup(provider)
+  .then((result) => {
+    /** @type {firebase.auth.OAuthCredential} */
+    var credential = result.credential;
+
+    // The signed-in user info.
+    var user = result.user;
+
+    // You can also get the Apple OAuth Access and ID Tokens.
+    var accessToken = credential.accessToken;
+    var idToken = credential.idToken;
+
+    console.log(result)
+    // IdP data available using getAdditionalUserInfo(result)
+  // ...
+  })
+  .catch((error) => {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    // The email of the user's account used.
+    var email = error.email;
+    // The firebase.auth.AuthCredential type that was used.
+    var credential = error.credential;
+
+    console.log(error)
+  });
     }
 
 </script>

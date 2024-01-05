@@ -986,7 +986,7 @@
         font-weight:700;
         color:#1c1d1f;
       }
-      .myall button{
+      .myalls{
         width:88%;
         height:50px;
        background:none;
@@ -996,7 +996,7 @@
         font-weight:500;
         color:#ed017f;
       }
-      .myall button:hover{
+      .myalls:hover{
         background-color: #ed017f;
         color:#ffffff;
       }
@@ -1736,22 +1736,22 @@
                 </div>
             </div>
               </div>
-              <div class="mycart">
+              <div id="addtocartbut" class="mycart">
                 <div>
                 <img src="cart.png" alt="" width="30px" height="35px">
-              <button id="mycart">My cart</button>
+              <button  id="mycart">My cart</button>
               </div>
-              <div id="addtocart"></div>
+              <div class="theCart" id="addtocart"></div>
               </div>
            </div>
            </div>
 
            <div id="nav5">
             <div id="menu">
-            <button><span class="material-symbols-outlined">home</span> <br> Home</button>
-            <button><span class="material-symbols-outlined">sell</span><br> Deals</button>
-            <button><span class="material-symbols-outlined">shopping_cart</span> <br> carts</button>
-            <button><span class="material-symbols-outlined">menu</span><br>more</button>
+            <button onclick="home()"><span class="material-symbols-outlined">home</span> <br> Home</button>
+            <button ><span class="material-symbols-outlined">sell</span><br> Deals</button>
+            <button onclick="cartshopping()"><span class="material-symbols-outlined">shopping_cart</span> <br> carts</button>
+            <button onclick="mean()"><span class="material-symbols-outlined">menu</span><br>more</button>
             </div>
            </div>
       </main>
@@ -2328,7 +2328,7 @@
 
           <div class="span2">
            <button><span class="material-symbols-outlined">storefront</span></button>
-            <button><span class="material-symbols-outlined">shopping_cart</span></button>
+            <button onclick="cartshopping()"><span class="material-symbols-outlined">shopping_cart</span>  <span class="theCart"  style=" color:#33b27b; font-size:14px; font-weight: 600; border-radius:100px;"></span></button>
           </div>
 
           <div id="menus">
@@ -2603,7 +2603,7 @@
 
 
       <main id="myproduct">
-       
+        
       </main>
 
 
@@ -2889,16 +2889,19 @@ appId: "1:226093515382:web:04b3293079ef67b8705557"
             products = JSON.parse(localStorage.getItem("allProd"))
             products.forEach(element => {
                 myproduct.innerHTML += `
-                    <div class="myall" onclick="myprod(event)" id='${element.id}'>
+               
+                    <div class="myall"  >
                         <div>
                             <img src="${element.images[0]}" />  
                             <div>
                                 <h3>${element.title}</h3>
-                                <h1> $${element.price}</h1> 
-                                <p>${element.category}</p> 
-                            </div>
+                                <h1> N${element.price}</h1> 
+                                <p>${element.category}.</p> 
+                                <button onclick="myprod(event)" id='${element.id}' style="border:0; background:none; line-height:13px; font-size:14; font-weight:600;">see more</button>
                         </div>
-                        <button onclick="showModal()">Add to cart</button>
+                        </div>
+                        <button class="myalls" onclick="showModal(event)">Add to cart</button>
+                    </div>
                     </div>
                 `;
             });
@@ -2915,7 +2918,7 @@ appId: "1:226093515382:web:04b3293079ef67b8705557"
             });
 
             // Store the found object in local storage
-            let todo  = JSON.parse(localStorage.getItem("foundObj"))
+            // let todo  = JSON.parse(localStorage.getItem("foundObj"))
             localStorage.setItem("foundObj", JSON.stringify(foundObj));
 
             // Redirect to the "seemorepage.html" page
@@ -2923,6 +2926,64 @@ appId: "1:226093515382:web:04b3293079ef67b8705557"
         }
 
         fetchAllProducts();
+
+                    //add to cart 
+                    let cart = document.querySelectorAll(".theCart");
+
+let cartNum = localStorage.getItem("cartNo") || 0;
+
+let cartArray = JSON.parse(localStorage.getItem("cartArray")) || [];
+
+let cartDiv = document.getElementById('cartDiv')
+let categoryText = document.getElementById('cartegoryText')
+let cartAddText = document.getElementById('cartAddText')
+        function showModal(event){
+          cart.forEach((c) => {
+    ++cartNum;
+    localStorage.setItem("cartNo", cartNum);
+    displayCartNumber() 
+    el = event.target;
+    console.log(el.id);
+
+    let foundObj = products.find((obj) => {
+      return el.id == obj.id;
+    });
+    
+    console.log(foundObj)
+    let item = {
+      itemImage: foundObj.images[0],
+      itemTitle: foundObj.title,
+      itemQuantity: 1,
+      get itemPrice() {
+        return foundObj.price * this.itemQuantity;
+      },
+      itemAmount: foundObj.price,
+    };
+
+    cartAddText.innerHTML = `You've added ${foundObj.title} to Cart`
+    categoryText.innerHTML = `${foundObj.category.toUpperCase()}`
+ 
+ cartDiv.style.left = '20px'
+ cartDiv.style.transition = '0.5s'
+ 
+ setTimeout(()=> {
+   cartDiv.style.left = '-250px'
+   cartDiv.style.transition = '0.5s'
+ }, 3000)
+
+    cartArray.push(item);
+    localStorage.setItem("cartArray", JSON.stringify(cartArray));
+    console.log(cartArray);
+  });
+        }
+
+        function displayCartNumber() {
+  cart.forEach((c) => {
+
+    c.innerHTML = cartNum;
+  });
+}
+displayCartNumber()
 
     let myname = document.getElementById('myname')
     let name = document.getElementById('name')
@@ -2977,6 +3038,28 @@ function login() {
   window.location.href ='login.html'
 }
 
+let addtocartbut = document.getElementById('addtocartbut')
+addtocartbut.addEventListener('click', function(){
+  window.location.href ='cart.html'
+})
+function cartshopping(){
+  window.location.href ='cart.html'
+}
+function mean() {
+  if (mymenus == 1) {
+    menus.style.display = 'none'
+    cancel.style.display = 'block'
+    closes.style.display = 'none'
+    mymenus = 0
+  } else {
+    menus.style.display = 'block'
+    closes.style.display = 'block'
+    cancel.style.display = 'none'
+    mymenus = 1
+  }
+}
+function home() {
+  window.location.href = 'dashbroad.html'
+}
 </script>
 
-<!-- <script src="seemore.js"></script> -->
