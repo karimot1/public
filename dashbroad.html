@@ -251,6 +251,14 @@
       background: none;
       border:0;
     }
+    .span2{
+      display: flex;
+      flex-wrap: wrap;
+      height:20px;
+      align-items: center;
+      justify-content: space-around;
+      width:10%;
+    }
     .span2 button{
       background: none;
       border:0;
@@ -1322,7 +1330,11 @@
       color:#b1015f;
       font-family:"Helvetica Neue", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", sans-serif;
     }
-    
+    #addtocart{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
     
 
 /* media query */
@@ -1645,6 +1657,14 @@
       }
 }
 
+@media (max-width:920px){
+  #babything{
+    display:none;
+  }
+  #other{
+    display:none;
+  }
+}
 
    </style>
  
@@ -1745,7 +1765,7 @@
               </div>
            </div>
            </div>
-
+             
            <div id="nav5">
             <div id="menu">
             <button onclick="home()"><span class="material-symbols-outlined">home</span> <br> Home</button>
@@ -2328,7 +2348,7 @@
 
           <div class="span2">
            <button><span class="material-symbols-outlined">storefront</span></button>
-            <button onclick="cartshopping()"><span class="material-symbols-outlined">shopping_cart</span>  <span class="theCart"  style=" color:#33b27b; font-size:14px; font-weight: 600; border-radius:100px;"></span></button>
+            <button onclick="cartshopping()"><span class="material-symbols-outlined">shopping_cart</span>  <span id="theCart"  style=" color:#33b27b; font-size:14px; font-weight: 600; border-radius:100px;"></span></button>
           </div>
 
           <div id="menus">
@@ -2606,6 +2626,10 @@
         
       </main>
 
+      <div id="cartDiv">
+        <div id="cartAddText"></div>
+        <div id="categoryText"></div>
+       </div>
 
       <div id="background2">
         <div class="footer">
@@ -2900,7 +2924,7 @@ appId: "1:226093515382:web:04b3293079ef67b8705557"
                                 <button onclick="myprod(event)" id='${element.id}' style="border:0; background:none; line-height:13px; font-size:14; font-weight:600;">see more</button>
                         </div>
                         </div>
-                        <button class="myalls" onclick="showModal(event)">Add to cart</button>
+                        <button class="myalls" onclick="showModal(event)" id='${element.id}'>Add to cart</button>
                     </div>
                     </div>
                 `;
@@ -2928,7 +2952,7 @@ appId: "1:226093515382:web:04b3293079ef67b8705557"
         fetchAllProducts();
 
                     //add to cart 
-                    let cart = document.querySelectorAll(".theCart");
+  let cart = document.querySelectorAll(".theCart");
 
 let cartNum = localStorage.getItem("cartNo") || 0;
 
@@ -2937,45 +2961,46 @@ let cartArray = JSON.parse(localStorage.getItem("cartArray")) || [];
 let cartDiv = document.getElementById('cartDiv')
 let categoryText = document.getElementById('cartegoryText')
 let cartAddText = document.getElementById('cartAddText')
-        function showModal(event){
-          cart.forEach((c) => {
-    ++cartNum;
-    localStorage.setItem("cartNo", cartNum);
-    displayCartNumber() 
-    el = event.target;
-    console.log(el.id);
 
-    let foundObj = products.find((obj) => {
-      return el.id == obj.id;
-    });
-    
-    console.log(foundObj)
-    let item = {
-      itemImage: foundObj.images[0],
-      itemTitle: foundObj.title,
-      itemQuantity: 1,
-      get itemPrice() {
-        return foundObj.price * this.itemQuantity;
-      },
-      itemAmount: foundObj.price,
-    };
+function showModal(event) {
+    let el = event.target;
+    let foundObj = products.find((obj) => el.id == obj.id);
 
-    cartAddText.innerHTML = `You've added ${foundObj.title} to Cart`
-    categoryText.innerHTML = `${foundObj.category.toUpperCase()}`
- 
- cartDiv.style.left = '20px'
- cartDiv.style.transition = '0.5s'
- 
- setTimeout(()=> {
-   cartDiv.style.left = '-250px'
-   cartDiv.style.transition = '0.5s'
- }, 3000)
+    // Check if the item is already in the cart
+    let existingItemIndex = cartArray.findIndex((item) => item.itemTitle === foundObj.title);
 
-    cartArray.push(item);
+    if (existingItemIndex !== -1) {
+        // If the item is already in the cart, increment its quantity
+        cartArray[existingItemIndex].itemQuantity++;
+    } else {
+        // If the item is not in the cart, add a new entry
+        let item = {
+            itemImage: foundObj.images[0],
+            itemTitle: foundObj.title,
+            itemQuantity: 1,
+            get itemPrice() {
+                return foundObj.price * this.itemQuantity;
+            },
+            itemAmount: foundObj.price,
+        };
+
+        cartArray.push(item);
+    }
+
+    // Update localStorage with the modified cartArray
     localStorage.setItem("cartArray", JSON.stringify(cartArray));
-    console.log(cartArray);
-  });
-        }
+
+    // Update the cart count
+    cartNum = cartArray.reduce((total, item) => total + item.itemQuantity, 0);
+    localStorage.setItem("cartNo", cartNum);
+
+    // Display the updated cart count
+    displayCartNumber();
+
+    // The rest of your existing code for displaying messages, updating UI, etc.
+}
+
+
 
         function displayCartNumber() {
   cart.forEach((c) => {

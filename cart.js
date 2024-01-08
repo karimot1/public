@@ -1,13 +1,11 @@
 
-document.addEventListener('DOMContentLoaded', function () {
-  // Your existing code here
-  let cartArray = JSON.parse(localStorage.getItem("cartArray")) || [];
-  let cartNum = localStorage.getItem("cartNo");
+
+  
   let cartContainer = document.getElementById("cartContainer");
   let totals = document.getElementById("total");
   let subtotals = document.getElementById("subtotal");
-  let thetotal = document.getElementById("thetotal");
-  let tbody = document.getElementById('tbody');
+ 
+  let tbody = document.getElementById('tBody');
 console.log( cartNum );
 
   let totalPrice = localStorage.getItem("totalPrice") || 0;
@@ -18,7 +16,12 @@ console.log( cartNum );
   localStorage.setItem("totalPrice", totalPrice);
 
   function displayCart() {
-    if (cartArray == null || cartArray.length == 0) {
+    tbody.innerHTML = ""
+    let totalAmount = 0;
+    if (!cartNum || cartNum == 0 || cartArray.length === 0) {
+      cartArray = [];
+            localStorage.removeItem("cartArray");
+
       cartContainer.innerHTML = `
   
   
@@ -43,37 +46,47 @@ console.log( cartNum );
   const staticTime = time()
   console.log(time());
   console.log(currentTime);
+ 
       cartArray.forEach(
-        ({ itemImage, itemQuantity, itemTitle, itemPrice, itemAmount }, i) => {
-          tbody.innerHTML += `<tr style="background-color: red; color: black">
-            <td style="display: flex;">
+        ({ itemImage, itemQuantity, itemTitle, itemPrice }, i) => {
+          const currentItemAmount = itemPrice * itemQuantity;
+          totalAmount += currentItemAmount;
+
+          tbody.innerHTML += `<tr >
+            <td>
+            <div style="display:flex; margin-left:10px;">
                 <img width="50px" height="50px" src="${itemImage}" alt="">
                 
-                <div class="proo">
-                    <h5>${itemTitle}</h5>
-                <p>Sold by </p>
+                <div style="margin-left:10px;" class="proo">
+                    <h5 style="font-size:15px;font-weight:600;color:#404553;">${itemTitle}</h5>
+                <p style="font-size:12px;font-weight:400;color:#50545b;">Sold by  Konga</p>
+                </div>
                 </div>
             
-            
             </td>
-            <td style="background-color: blue;" >
+            <td>
                 
-                <div style="display: flex; margin-left: 10px;" class="inc">
-                <button style="width: 25px; height: 25px;">-</button>
-                <button style="width: 25px; height: 25px;">${itemQuantity}</button>
-                <button style="width: 25px; height: 25px;">+</button>
+                <div style="display: flex; flex-wrap:wrap; justify-content: center; align-items:center;" class="inc">
+                <button onclick="decreaseQuantity(${i})" style="width: 25px; box-shadow:3px 3px 3px 3px rgba(0, 0, 0, 0.062); background-color:#ffffff;border:1px solid  #b5b2ac; height: 25px;">-</button>
+                <button style="width: 25px;box-shadow:3px 3px 3px 3px rgba(0, 0, 0, 0.062); background-color:#ffffff;border:1px solid  #b5b2ac; height: 25px;">${itemQuantity}</button>
+                <button onclick="increaseQuantity(${i})" style="width: 25px;box-shadow:3px 3px 3px 3px rgba(0, 0, 0, 0.062);   background-color:#ffffff;border:1px solid  #b5b2ac; height: 25px;">+</button>
                 </div>
                 
             </td>
             
             <td>
-               <h5>N${itemPrice} </h5>
-                <p> N${itemAmount} x  ${itemQuantity} pcs </p>
+            <div style="display: flex; flex-wrap:wrap;  width:200px; align-items:center;">
+            <div>
+               <h5 style="font-size:20px;font-weight:400;color:#000000;">N${currentItemAmount} </h5>
+                <p style="font-size:12px;font-weight:400;color:#000000;"> N${itemPrice} x  ${itemQuantity} pcs </p>
+                </div>
+                </div>
             </td>
-            <td style=" text-align: end; ">
+            <td>
                 
-                <div style="margin-right: 20px;" class="r">
-                <button onclick="deleteItem(event)" id="${i}" value="${itemQuantity}" name="${itemPrice}" >Remove item</button>
+                <div style="display: flex; flex-wrap:wrap; justify-content: center; align-items:center;" class="r">
+                <button style="width:100px; border: 0; background: none; color:#94004f;font-size:12px;font-weight:700;" onclick="deleteItem(event,document.getElementById('tBody')
+              )" id="${i}" value="${itemQuantity}" name="${itemPrice}" >Remove item</button>
                 <br>
                 <p> ${ currentTime - staticTime }mins ago    </p>
                 </div>
@@ -84,41 +97,82 @@ console.log( cartNum );
         }
       );
     }
+    displayPrice(totalAmount);
   }
   
-  function displayPrice() {
-    subtotals.innerHTML = `Subtotal: N${totalPrice}`;
-    totals.innerHTML = `Total: N${totalPrice}`;
+  function decreaseQuantity(index) {
+    if (cartArray[index].itemQuantity > 1) {
+      cartArray[index].itemQuantity--;
+      displayCart();
+    }
+  }
+  
+  function increaseQuantity(index) {
+    cartArray[index].itemQuantity++;
+    displayCart();
+  }
+  function displayPrice(totalAmount) {
+    subtotals.innerHTML = `Subtotal: N${totalAmount}`;
+    totals.innerHTML = `Total: N${totalAmount}`;
+  }
+  
+  document.addEventListener('DOMContentLoaded', function () {
+    displayPrice(totalPrice);
+    displayCart();
+  });
+
+
+
+
+function deleteItem(event, tbody) {
+  try {
+    let el = event.target;
     
+    // Log the initial values
+    console.log("Initial cartNum:", cartNum);
+    console.log("Initial cartArray:", cartArray);
+    console.log("Initial totalPrice:", totalPrice);
+
+    // Ensure el.value is a valid number
+    let valueToRemove = Number(el.value) || 0;
+
+    // Ensure cartNum is a valid number
+    cartNum = Number(cartNum) || 0;
+
+    // Ensure cartNum won't go below zero
+    cartNum = Math.max(0, cartNum - valueToRemove);
+
+    // Log the updated values
+    console.log("Updated cartNum:", cartNum);
+
+    localStorage.setItem("cartNo", cartNum);
+    let index = el.id;
+    cartArray.splice(index, 1);
+    localStorage.setItem("cartArray", JSON.stringify(cartArray));
+
+    // Log the updated cartArray
+    console.log("Updated cartArray:", cartArray);
+
+    // Remove only the row corresponding to the deleted item
+    tbody.deleteRow(index);
+
+    totalPrice = totalPrice - Number(el.name);
+    localStorage.setItem("totalPrice", totalPrice);
+
+    // Log the updated totalPrice
+    console.log("Updated totalPrice:", totalPrice);
+
+    // Display the updated cart
+    displayCart();
+    displayCartNumber();
+    displayPrice(totalAmount);
+
+  } catch (error) {
+    console.error("Error in deleteItem:", error);
   }
-  
-  displayPrice();
-
-  displayCart();
-});
-
-
-
-
-
-
-function deleteItem(event) {
-  el = event.target;
-  cartNum = Number(cartNum) - Number(el.value);
-  localStorage.setItem("cartNo", cartNum);
-  let index = el.id;
-  cartArray.splice(index, 1);
-  localStorage.setItem("cartArray", JSON.stringify(cartArray));
-  tbody.innerHTML = "";
-  totalPrice = totalPrice - Number(el.name);
-  localStorage.setItem("totalPrice", totalPrice);
-  displayCart();
-
-  displayCartNumber();
-
-  displayPrice();
 }
 
+document.addEventListener('DOMContentLoaded', function () {
 currentUser = localStorage.getItem("currentUser");
 console.log(currentUser);
 
@@ -133,9 +187,9 @@ function payWithPaystack(e) {
   </div>
   </div>`;
   let handler = PaystackPop.setup({
-    key: "pk_test_9a558288d1670a641dafa6f4e899ddb24f2fe749", // Replace with your public key
+    key: "pk_test_06f70739fc43a6443c0f81154ed8bd962e557edf", // Replace with your public key
     email: currentUser,
-    amount: totalPrice * 100,
+    amount: totalPrice * 100* cartNum,
     ref: "" + Math.floor(Math.random() * 1000000000 + 1), // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
     // label: "Optional string that replaces customer email"
     onClose: function () {
@@ -156,4 +210,6 @@ function payWithPaystack(e) {
   });
 
   handler.openIframe();
+  console.error(handler)
 }
+});

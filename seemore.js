@@ -143,7 +143,7 @@ theClickedItem.innerHTML = `
 <b class="me-3 ms-3" > Quantity:</b>
 <button class="ms-1  bg-dark text-light rounded-circle ps-2 pe-2" onclick="crease(quantityNo--)" > - </button> 
 
-<small class="ms-1" id="quantity"> 1 </small>  
+<small class="ms-1" id="quantity">1</small>  
 
 <button class="ms-1 bg-dark text-light rounded-circle ps-2 pe-2" onclick="crease(quantityNo++)"> + </button>
 
@@ -162,31 +162,7 @@ theClickedItem.innerHTML = `
 
 `;
 
-// shopBar.innerHTML = `
 
-
-// <div class="d-flex mt-4  flex-row  align-items-start justify-content-start ">
-// <img class="rounded" width="70px" height="70%" src="${theObj.images[0]}"> </img>
-// <div class="d-flex ms-2 flex-column h-100 align-items-start justify-content-start ">
-// <b  style="color:#644ba0; font-size:12px;" > ${theObj.brand} </b>
-// <b> ${theObj.title} </b>
-// </div>
-// </div>
-
-// <h2 class="h-100 mt-5" style=" width:90px; font-weight:600;"> N${theObj.price}.00  </h2>
-
-// <legend class=" h-75 mt-3 ms-5 d-flex flex-column align-items-center justify-content-center" style="text-align:center; width:90px; font-size:15px;">
-// <p><b class="me-3 ms-3" style="font-family:sans-serif; " > Quantity:</b>
-// <button class="ms-1  bg-dark text-light rounded-circle ps-2 pe-2" onclick="crease(quantityNo--)" > - </button> 
-
-// <small class="ms-1" id="quantityy">  </small>  
-
-// <button class="ms-1 bg-dark text-light rounded-circle ps-2 pe-2" onclick="crease(quantityNo++)"> + </button> </p>
-//   </legend> 
-
-//   <b onclick="addToC(event)" id="${theObj.id}" value='${theObj.price}'  style="font-size:14px;height:30px; width:200px; color:white;" class="d-flex align-items-center mb-4  h-25 rounded shadow p-3 justify-content-center bg-success border border-success"> Buy Now </b> 
-
-// `
 
 itemName.innerHTML = theObj.title;
 
@@ -215,6 +191,12 @@ crease(quantityNo);
 
 // console.log(cartArray);
 
+let cart = document.querySelectorAll(".theCart");
+
+let cartNum = localStorage.getItem("cartNo") || 0;
+
+let cartArray = JSON.parse(localStorage.getItem("cartArray")) || [];
+
 function addToC(event) {
   if (quantityNo <= 0) {
     return;
@@ -226,7 +208,7 @@ function addToC(event) {
       el = event.target;
       console.log(el.id);
 
-      let foundObj = fetchedData.find((obj) => {
+      let foundObj = theObj.find((obj) => {
         return el.id == obj.id;
       });
 
