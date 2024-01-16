@@ -52,9 +52,10 @@ console.log( cartNum );
           const currentItemAmount = itemPrice * itemQuantity;
           totalAmount += currentItemAmount;
 
-          tbody.innerHTML += `<tr >
+          tbody.innerHTML += `
+          <tr >
             <td>
-            <div style="display:flex; margin-left:10px;">
+            <div  style="display:flex; flex-wrap:wrap; margin-left:10px;">
                 <img width="50px" height="50px" src="${itemImage}" alt="">
                 
                 <div style="margin-left:10px;" class="proo">
@@ -75,7 +76,7 @@ console.log( cartNum );
             </td>
             
             <td>
-            <div style="display: flex; flex-wrap:wrap;  width:200px; align-items:center;">
+            <div  style="display:flex; flex-wrap:wrap;  width:80px;" class="td">
             <div>
                <h5 style="font-size:20px;font-weight:400;color:#000000;">N${currentItemAmount} </h5>
                 <p style="font-size:12px;font-weight:400;color:#000000;"> N${itemPrice} x  ${itemQuantity} pcs </p>
@@ -85,7 +86,7 @@ console.log( cartNum );
             <td>
                 
                 <div style="display: flex; flex-wrap:wrap; justify-content: center; align-items:center;" class="r">
-                <button style="width:100px; border: 0; background: none; color:#94004f;font-size:12px;font-weight:700;" onclick="deleteItem(event,document.getElementById('tBody')
+                <button class="butremove" style="width:100px; border: 0; background-color:transparent; color:#94004f;font-size:12px;font-weight:700;" onclick="deleteItem(event,document.getElementById('tBody')
               )" id="${i}" value="${itemQuantity}" name="${itemPrice}" >Remove item</button>
                 <br>
                 <p> ${ currentTime - staticTime }mins ago    </p>
@@ -93,7 +94,8 @@ console.log( cartNum );
             
             
             </td>
-            </tr>`;
+            </tr>
+            `;
         }
       );
     }
@@ -179,37 +181,40 @@ console.log(currentUser);
 const paymentForm = document.getElementById("paymentForm");
 paymentForm.addEventListener("submit", payWithPaystack, false);
 
-function payWithPaystack(e) {
-  e.preventDefault();
-  paymentForm.innerHTML = `<div class="text-center">
-  <div class="spinner-border" role="status">
-    <span class="visually-hidden">Loading...</span>
-  </div>
-  </div>`;
-  let handler = PaystackPop.setup({
-    key: "pk_test_06f70739fc43a6443c0f81154ed8bd962e557edf", // Replace with your public key
-    email: currentUser,
-    amount: totalPrice * 100* cartNum,
-    ref: "" + Math.floor(Math.random() * 1000000000 + 1), // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
-    // label: "Optional string that replaces customer email"
-    onClose: function () {
-      alert("Window closed.");
-    },
-    callback: function (response) {
-      let message = "Payment complete! Reference: " + response.reference;
-      alert(message);
-      paymentForm.innerHTML = 'Payment Confirmed';
-      cartArray.splice(0, cartArray.length);
-      localStorage.setItem("cartArray", JSON.stringify(cartArray));
-      tbody.innerHTML = "";
-      displayCart();
-      cartNum = 0;
-      localStorage.setItem("cartNo", cartNum);
-      displayCartNumber();
-    },
-  });
 
-  handler.openIframe();
-  console.error(handler)
-}
+  function payWithPaystack(e) {
+    e.preventDefault();
+    paymentForm.innerHTML = `<div class="text-center">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+    </div>`;
+    let handler = PaystackPop.setup({
+      key: "pk_test_06f70739fc43a6443c0f81154ed8bd962e557edf", // Replace with your public key
+      email: currentUser,
+      amount: totalPrice * 100* cartNum,
+      ref: "" + Math.floor(Math.random() * 1000000000 + 1), // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
+      // label: "Optional string that replaces customer email"
+      onClose: function () {
+        alert("Window closed.");
+      },
+      callback: function (response) {
+        let message = "Payment complete! Reference: " + response.reference;
+        alert(message);
+        paymentForm.innerHTML = 'Payment Confirmed';
+        cartArray.splice(0, cartArray.length);
+        localStorage.setItem("cartArray", JSON.stringify(cartArray));
+        tbody.innerHTML = "";
+        displayCart();
+        cartNum = 0;
+        localStorage.setItem("cartNo", cartNum);
+        displayCartNumber();
+      },
+    });
+  
+    handler.openIframe();
+   
+  }
+
+
 });

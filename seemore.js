@@ -85,6 +85,11 @@
 
 
 let theObj = JSON.parse(localStorage.getItem("foundObj"));
+let fetchedProduct = JSON.parse(localStorage.getItem("allProd"))
+console.log(fetchedProduct);
+
+
+
 let shopBar = document.getElementById('shopBar')
 console.log(theObj);
 let remainingStock;
@@ -97,7 +102,9 @@ let itemName = document.getElementById("itemName");
 
 
   soldItem.innerHTML = `${theObj.category}`;
-
+  categoryitem .innerHTML = `${theObj.category}`;
+  itemsname.innerHTML = `${theObj.title}`;
+  
 theClickedItem.innerHTML = `
 <div class="div3">
 <div class="d-flex align-items-start justify-content-around" >
@@ -177,7 +184,7 @@ function crease(no) {
     quantityNo = theObj.stock - 1;
   } else {
     quantity.innerHTML = quantityNo;
-    quantityy.innerHTML = quantityNo;
+    // quantityy.innerHTML = quantityNo;
     amountLeft = theObj.stock - quantityNo;
     remainingStock = document.getElementById("amountLaft");
     remainingStock.innerHTML = `Stock left : ${amountLeft}`;
@@ -197,41 +204,53 @@ let cartNum = localStorage.getItem("cartNo") || 0;
 
 let cartArray = JSON.parse(localStorage.getItem("cartArray")) || [];
 
+
 function addToC(event) {
-  if (quantityNo <= 0) {
-    return;
+  let el = event.target;
+  let foundObj = fetchedProduct.find((obj) => el.id == obj.id);
+
+  // Check if the item is already in the cart
+  let existingItemIndex = cartArray.findIndex((item) => item.itemTitle === foundObj.title);
+
+  if (existingItemIndex !== -1) {
+      // If the item is already in the cart, increment its quantity
+      cartArray[existingItemIndex].itemQuantity++;
   } else {
-    cart.forEach((c) => {
-      cartNum = Number(cartNum) + Number(quantityNo) ;
-      localStorage.setItem("cartNo", cartNum);
-      c.innerHTML = cartNum;
-      el = event.target;
-      console.log(el.id);
-
-      let foundObj = theObj.find((obj) => {
-        return el.id == obj.id;
-      });
-
+      // If the item is not in the cart, add a new entry
       let item = {
-        itemImage: foundObj.images[0],
-        itemTitle: foundObj.title,
-        itemQuantity: Number(quantityNo),
-       get itemPrice() {
-          return foundObj.price * this.itemQuantity;
-        },
-        itemAmount: foundObj.price 
+          itemImage: foundObj.images[0],
+          itemTitle: foundObj.title,
+          itemQuantity: 1,
+          get itemPrice() {
+              return foundObj.price * this.itemQuantity;
+          },
+          itemAmount: foundObj.price,
       };
 
       cartArray.push(item);
-      localStorage.setItem("cartArray", JSON.stringify(cartArray));
-      console.log(cartArray);
-
-      window.location.href = "cart.html";
-    });
+      
   }
+  window.location.href = "cart.html";
+  // Update localStorage with the modified cartArray
+  localStorage.setItem("cartArray", JSON.stringify(cartArray));
+
+  // Update the cart count
+  cartNum = cartArray.reduce((total, item) => total + item.itemQuantity, 0);
+  localStorage.setItem("cartNo", cartNum);
+
+  // Display the updated cart count
+  displayCartNumber();
+
+  // The rest of your existing code for displaying messages, updating UI, etc.
 }
 
+function displayCartNumber() {
+  cart.forEach((c) => {
 
+    c.innerHTML = cartNum;
+  });
+}
+displayCartNumber()
 
 
 

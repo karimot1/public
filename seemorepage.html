@@ -1291,6 +1291,63 @@
       }
       
   }
+  @media (max-width:1350px){
+    .searchInput input{
+        height:40px;
+        width:280px;
+      }
+      .searchInput button{
+         width:40px;
+         height:40px;
+      }
+       #login{
+      width:100px;
+      height:60px;
+      margin-left:5px;
+      padding-left:10px;
+       }
+      
+}
+@media (max-width:620px){
+  .span2{
+      display: flex;
+      flex-wrap: wrap;
+      height:20px;
+      align-items: center;
+      justify-content: space-around;
+      width:16%;
+    }
+}
+@media (max-width:395px){
+  .span2{
+      display: flex;
+      flex-wrap: wrap;
+      height:20px;
+      align-items: center;
+      justify-content: space-around;
+      width:22%;
+    }
+}
+@media (max-width:295px){
+  .span2{
+      display: flex;
+      flex-wrap: wrap;
+      height:20px;
+      align-items: center;
+      justify-content: space-around;
+      width:28%;
+    }
+}
+@media (max-width:235px){
+  .span2{
+      display: flex;
+      flex-wrap: wrap;
+      height:20px;
+      align-items: center;
+      justify-content: space-around;
+      width:35%;
+    }
+}
   @media (max-width : 959px){
     .long button{
         width: 80px;
@@ -2320,7 +2377,7 @@
     
               <div class="span2">
                <button><span class="material-symbols-outlined">storefront</span></button>
-                <button onclick="cartshopping()"><span class="material-symbols-outlined">shopping_cart</span> <span  id="theCart" style=" color:#33b27b; font-size:14px; font-weight: 600; border-radius:100px;"></span></button>
+                <button onclick="cartshopping()"><span class="material-symbols-outlined">shopping_cart</span> <span  class="theCart" style=" color:#33b27b; font-size:14px; font-weight: 600; border-radius:100px;"></span></button>
               </div>
               <div id="input">
                 <input type="search"  placeholder="Search for product,brand and categories">
@@ -2331,7 +2388,7 @@
 
               <div id="background1">
                 <div class="mybut">
-                <button id="HOME" onclick="myhome()">Home<span class="material-symbols-outlined">navigate_next</span></button>
+                <button id="HOME" onclick="myhome()">Home<span class="material-symbols-outlined">navigate_next</span><span id="itemsname"></span><span class="material-symbols-outlined">navigate_next</span>  <span style="color: #b1015f;" id="categoryitem"></span></button>
                 <div id="soldItem"></div>
               </div>
 
@@ -2346,11 +2403,11 @@
                 
                
                 <div class="cart-item" id="productId1">
-                  <!-- Cart item content goes here -->
+                  
                 </div>
                 
                 <div class="cart-item" id="productId2">
-                  <!-- Cart item content goes here -->
+                  
                 </div>
               </div>
 
@@ -2610,10 +2667,10 @@ kangas.addEventListener('click', function () {
 })
 
 function menu(){
-window.location.href = 'dashbroad.html'
+window.location.href = 'dash.html'
 }
 function myhome(){
-window.location.href = 'dashbroad.html'
+window.location.href = 'dash.html'
 }
 let addtocartbut = document.getElementById('addtocartbut')
 addtocartbut.addEventListener('click', function(){
@@ -2636,7 +2693,11 @@ function mean() {
   }
 }
 function home() {
-  window.location.href = 'dashbroad.html'
+  window.location.href = 'dash.html'
 }
+
+
+
+
 </script>
 <script src="seemore.js"></script>

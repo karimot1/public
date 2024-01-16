@@ -388,22 +388,28 @@ span{
         <script>
             let username= document.getElementById('username')
             let phone = document.getElementById('phone')
+            let lastname = document.getElementById('lastname')
       let email = document.getElementById('email')
       let password = document.getElementById('passwords')
-    
-      // let allUsers = JSON.parse(localStorage.getItem('allUsers')) || []
-      
+    let account = document.getElementById('account')
+      let loginButton = document.getElementById('loginButton')
     
     function signin() {
+        loginButton.innerHTML  = ` <div class="text-center">
+         <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>`
     firebase.auth().createUserWithEmailAndPassword(email.value, password.value,)
   .then((userCredential) => {
     // Signed in 
     var user = userCredential.user;
     console.log(user)
-    
+    let username = username.value
+    console.log(username);
 console.log(user)
 user.updateProfile({
-  displayName: username.value,
+  displayName: username.value + ""  + lastname.value,
   phoneNumber:phone.value
 })
 .then(() => {
@@ -426,6 +432,11 @@ user.updateProfile({
 
 
     function login() {
+        account.innerHTML  = ` <div class="text-center">
+         <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>`
         window.location.href = 'login.html'
     }
         </script>
