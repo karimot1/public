@@ -50,7 +50,7 @@ console.log( cartNum );
       cartArray.forEach(
         ({ itemImage, itemQuantity, itemTitle, itemPrice }, i) => {
           const currentItemAmount = itemPrice * itemQuantity;
-          totalAmount += currentItemAmount;
+          totalAmount += currentItemAmount;         
 
           tbody.innerHTML += `
           <tr >
@@ -175,7 +175,7 @@ function deleteItem(event, tbody) {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-currentUser = localStorage.getItem("currentUser");
+currentUser = JSON.parse(localStorage.getItem("currentUser"))
 console.log(currentUser);
 
 const paymentForm = document.getElementById("paymentForm");
@@ -191,7 +191,7 @@ paymentForm.addEventListener("submit", payWithPaystack, false);
     </div>`;
     let handler = PaystackPop.setup({
       key: "pk_test_06f70739fc43a6443c0f81154ed8bd962e557edf", // Replace with your public key
-      email: currentUser,
+      email: currentUser.email,
       amount: totalPrice * 100* cartNum,
       ref: "" + Math.floor(Math.random() * 1000000000 + 1), // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
       // label: "Optional string that replaces customer email"

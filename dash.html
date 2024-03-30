@@ -1957,7 +1957,7 @@
                   <div class="konganame">
                       Hi <span id="myname"></span>
                   </div> 
-                <div class="konga">
+                <div onclick="profile()" class="konga">
                   <span class="material-symbols-outlined">
                       person
                       </span>
@@ -3218,100 +3218,50 @@ appId: "1:226093515382:web:04b3293079ef67b8705557"
 
  let cart = document.querySelectorAll(".theCart");
 
-let cartNum = localStorage.getItem("cartNo") || 0;
-
-let cartArray = JSON.parse(localStorage.getItem("cartArray")) || [];
-
 let cartDiv = document.getElementById('cartDiv')
 let categoryText = document.getElementById('cartegoryText')
 let cartAddText = document.getElementById('cartAddText')
 
-function showModal(event) {
-    let el = event.target;
-    let foundObj = products.find((obj) => el.id == obj.id);
-
-    // Check if the item is already in the cart
-    let existingItemIndex = cartArray.findIndex((item) => item.itemTitle === foundObj.title);
-
-    if (existingItemIndex !== -1) {
-        // If the item is already in the cart, increment its quantity
-        cartArray[existingItemIndex].itemQuantity++;
-    } else {
-        // If the item is not in the cart, add a new entry
-        let item = {
-            itemImage: foundObj.images[0],
-            itemTitle: foundObj.title,
-            itemQuantity: 1,
-            get itemPrice() {
-                return foundObj.price * this.itemQuantity;
-            },
-            itemAmount: foundObj.price,
-        };
-
-        cartArray.push(item);
-    }
-
-    // Update localStorage with the modified cartArray
-    localStorage.setItem("cartArray", JSON.stringify(cartArray));
-
-    // Update the cart count
+// Function to update the cart number based on the current cart state in localStorage
+function updateCartNumber() {
+    cartArray = JSON.parse(localStorage.getItem("cartArray")) || [];
     cartNum = cartArray.reduce((total, item) => total + item.itemQuantity, 0);
     localStorage.setItem("cartNo", cartNum);
-
-    // Display the updated cart count
     displayCartNumber();
-
-    // The rest of your existing code for displaying messages, updating UI, etc.
 }
 
-
-
-        function displayCartNumber() {
-  cart.forEach((c) => {
-
-    c.innerHTML = cartNum;
-  });
+// Function to display the cart number in UI
+function displayCartNumber() {
+    cart.forEach((c) => {
+        c.innerHTML = cartNum;
+    });
 }
-displayCartNumber()
 
-    let myname = document.getElementById('myname')
-    let name = document.getElementById('name')
-    let myemail = document.getElementById('myemail')
-    function dispusers() {
-    firebase.auth().onAuthStateChanged((user) => {
-  if (user) {
-    // User is signed in, see docs for a list of available properties
-    // https://firebase.google.com/docs/reference/js/v8/firebase.User
-    var uid = user.uid;
-    console.log(user)
-    myname.innerHTML =`${user.displayName.split('')[1]}`
-    name.innerHTML =`${user.displayName}`
-    myemail.innerHTML = `${user.email}`
-    // ...
-  } else {
-    alert('successful logout')
-    window.location.href = 'login.html'
-  }
-});
-}
-dispusers() 
-let kangas = document.getElementById('kangas')
+updateCartNumber();
 
+
+
+
+// Function to sign out user
+let kangas = document.getElementById('kangas');
 kangas.addEventListener('click', function () {
-  firebase.auth().signOut().then(() => {
-        
-        window.location.href = 'index.html'
-}).catch((error) => {
- 
-  console.log(error)
+    firebase.auth().signOut().then(() => {
+        localStorage.removeItem('currentUser');
+        localStorage.removeItem('cartArray'); 
+        updateCartNumber(); 
+        window.location.href = 'index.html';
+    }).catch((error) => {
+        console.error(error);
+    });
 });
-})
+
+
 
 let loged = document.getElementById('loged')
 
 loged.addEventListener('click', function () {
   firebase.auth().signOut().then(() => {
-      
+    localStorage.removeItem('currentUser');
         window.location.href = 'index.html'
 }).catch((error) => {
  
@@ -3319,12 +3269,6 @@ loged.addEventListener('click', function () {
 });
 })
 
-function signup() {
-  window.location.href ='signup.html'
-}
-function login() {
-  window.location.href ='login.html'
-}
 
 let addtocartbut = document.getElementById('addtocartbut')
 addtocartbut.addEventListener('click', function(){
@@ -3402,7 +3346,7 @@ function Sponsored() {
         sponsItem.innerHTML += `
             <div class="itemsphon" onclick="items1(${index})" data-id="${obj.id}">
                 <div>
-                    <img src="${obj.images[1]}" alt="">
+                    <img src="${obj.images[Math.floor(Math.random()*5)]}" alt="">
                 </div>
                 <div style="display:flex; flex-wrap:wrap;">
                     <h1>${obj.description.slice(0,25)}..</h1>
@@ -3416,7 +3360,58 @@ function Sponsored() {
 Sponsored();
 
 
-function seeall() {
-  window.location.href = "shomore.html"
+
+// Scroll Event for Dynamic UI Adjustments
+document.addEventListener('DOMContentLoaded', function() {
+    let mykongaimage = document.getElementById('mykongaimage');
+    let searchBar = document.getElementById('nav2');
+    let categories = document.getElementById('categories');
+    window.addEventListener('scroll', () => {
+      let windowHeight = window.scrollY;
+      if (windowHeight > 100) {
+        mykongaimage.style.display = 'none';
+        searchBar.style.transition = '1s';
+        categories.style.transition = '1s';
+        searchBar.style.top = '0px';
+        categories.style.top = '60px';
+      } else {
+        mykongaimage.style.display = 'flex';
+        searchBar.style.top = '40px';
+        categories.style.top = '100px';
+      }
+    });
+  });
+
+
+let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+console.log(currentUser);
+
+function displayUser() {
+  let name = document.getElementById("name")
+  if (currentUser && currentUser.displayName) {
+  let namme = currentUser.displayName.split(' ');
+
+  console.log(namme);
+
+  
+  myemail.innerHTML = currentUser.email || '';
+  
+  myname.innerHTML = namme[0] || '';
+  name.innerHTML = namme || '';
+}else{
+  window.location.href = 'login.html';
 }
+
+}
+
+displayUser()
+
+function seeall() {
+  window.location.href = "dashbroad.html"
+}
+
+function profile(){
+  window.location.href = "profile.html"
+}
+
 </script>

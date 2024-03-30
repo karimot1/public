@@ -3112,18 +3112,19 @@ ddcategories.addEventListener('click', function(){
 
 let login = document.getElementById('login')
     login.addEventListener('click', function(){
-      setTimeout(()=> {
+    
         window.location.href = 'signup.html'
- }, 10000)
       
     })
 
     
     
 function signup() {
+  localStorage.removeItem('cartArray'); 
   window.location.href ='signup.html'
 }
 function logins() {
+  localStorage.removeItem('cartArray'); 
   window.location.href ='login.html'
 }
 
@@ -3165,7 +3166,7 @@ function showMore() {
         divitem.innerHTML += `
             <div class="items" onclick="items1(${index})" data-id="${obj.id}">
                 <div>
-                    <img src="${obj.images[1]}" alt="">
+                    <img src="${obj.images[Math.floor(Math.random()*5)]}" alt="">
                 </div>
                 <div>
                     <h1>${obj.description.slice(0,22)}</h1>
@@ -3203,7 +3204,7 @@ function Sponsored() {
         sponsItem.innerHTML += `
             <div class="itemsphon" onclick="items1(${index})" data-id="${obj.id}">
                 <div>
-                    <img src="${obj.images[0]}" alt="">
+                    <img src="${obj.images[Math.floor(Math.random()*5)]}" alt="">
                 </div>
                 <div style="display:flex; flex-wrap:wrap;">
                     <h1>${obj.description.slice(0,25)}..</h1>

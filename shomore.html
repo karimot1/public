@@ -1325,17 +1325,18 @@
       }
 
       #cartdiv{
-            width:25%;
+            width:250px;
             height:70px;
             background-color:#33b27b;
             position:fixed;
             border-radius:6px;
             left:-100%;
-            top:0;
+            bottom:0;
             display: flex;
             align-self: center;
+            transition:all 1s;
         }
-
+    
     /* dropdown */
 @media (max-width:1115px){
    .mylogo{
@@ -2373,7 +2374,7 @@
       
       <div id="cartdiv">
         <div style="color: #ffffff; font-size:12px;font-weight: 600;" id="cartAddText"></div>
-        <div id="categoryText"></div>
+        <div style="color: #ffffff; font-size:12px;font-weight: 600;" id="categoryText"></div>
       </div>
 
       <main id="myproduct">
@@ -2652,7 +2653,7 @@ let cartdiv = document.getElementById("cartdiv")
 
                       <div style="width:100% margin-top:10px;">
                      <div style="width:50%; margin-left:50px; " >
-                            <img src="${element.images[0]}"  width="100%" height="100px" />  
+                            <img src="${element.images[Math.floor(Math.random()*5)]}"  width="100%" height="100px" />  
                         </div>
                     
                         <div style="margin-top:10px">
@@ -2741,8 +2742,8 @@ let cartNum = localStorage.getItem("cartNo") || 0;
 
 let cartArray = JSON.parse(localStorage.getItem("cartArray")) || [];
 
-let cartDiv = document.getElementById('cartDiv')
-let categoryText = document.getElementById('cartegoryText')
+let cartDiv = document.getElementById('cartdiv')
+let categoryText = document.getElementById('categoryText')
 let cartAddText = document.getElementById('cartAddText')
 
 function showModal(event) {
@@ -2768,14 +2769,14 @@ function showModal(event) {
             
         };
         cartAddText.innerHTML = `You've added ${foundObj.title} to Cart`
-    // categoryText.innerHTML = `${foundObj.category.toUpperCase()}`
+      categoryText.innerHTML = `${foundObj.category.toUpperCase()}`
  
 
  
- setTimeout(()=> {
-  cartdiv.style.left = "0"
-   
- }, 2000)
+
+  cartDiv.style.left = "0"
+   cartDiv.style.display = "block"
+
 
         cartArray.push(item);
     }
@@ -2807,20 +2808,23 @@ displayCartNumber()
 
     let login = document.getElementById('login')
     login.addEventListener('click', function(){
-      setTimeout(()=> {
+      localStorage.removeItem('cartArray');
         window.location.href = 'signup.html'
- }, 3000)
+
       
     })
 
     
     
-function signup() {
-  window.location.href ='signup.html'
-}
-function logins() {
-  window.location.href ='login.html'
-}
+// function signup() {
+//   localStorage.removeItem('cartArray'); 
+//   window.location.href ='signup.html'
+// }
+// function logins() {
+//   localStorage.removeItem('cartArray'); 
+//   window.location.href ='login.html'
+
+// }
 
 let addtocartbut = document.getElementById('addtocartbut')
 addtocartbut.addEventListener('click', function(){

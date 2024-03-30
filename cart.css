@@ -1263,7 +1263,7 @@ margin: 0px 7px;
     
    }
    #table2::-webkit-scrollbar{
-    display: flex;
+    display:none;
    }
    #checkout{
     width:25%;

@@ -2787,4 +2787,14 @@ function displayCartNumber() {
   });
 }
 displayCartNumber()
+
+
+let login = document.getElementById('login')
+    login.addEventListener('click', function(){
+      localStorage.removeItem('cartArray');
+        window.location.href = 'signup.html'
+
+      
+    })
+
         </script>

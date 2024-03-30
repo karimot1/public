@@ -1369,13 +1369,16 @@
       }
 
       #cartdiv{
-            width:20%;
-            height:120px;
+            width:200px;
+            height:70px;
             background-color:#33b27b;
             position:fixed;
             border-radius:6px;
-            /* left:-100%; */
-            top:80%;
+            left:-100%;
+            bottom:0;
+            display: flex;
+            align-self: center;
+            transition:all 1s;
         }
     
 
@@ -1772,7 +1775,7 @@
 
    <section>
     <main class="nav1">
-      <div class="mykongaimage">
+      <div id="mykongaimage" class="mykongaimage">
             <img src="https://www-konga-com-res.cloudinary.com/image/upload/w_auto,f_auto,fl_lossy,dpr_auto,q_auto/assets/images/homepage/k_travels2.png" alt=""  width="100px">
           <img src="https://www-konga-com-res.cloudinary.com/image/upload/w_auto,f_auto,fl_lossy,dpr_auto,q_auto/assets/images/homepage/konga_pay.png" alt=""  width="100px">
           <img src="https://www-konga-com-res.cloudinary.com/image/upload/w_auto,f_auto,fl_lossy,dpr_auto,q_auto/assets/images/homepage/new_konga_drinks.png" alt=""  width="100px">
@@ -1815,7 +1818,7 @@
                     <div class="konganame">
                         Hi <span id="myname"></span>
                     </div> 
-                  <div class="konga">
+                  <div onclick="profile()" class="konga">
                     <span class="material-symbols-outlined">
                         person
                         </span>
@@ -2477,10 +2480,10 @@
         
       </main>
 
-      <div id="cartDiv">
-        <div id="cartAddText"></div>
-        <div id="categoryText"></div>
-       </div>
+      <div id="cartdiv">
+        <div style="color: #ffffff; font-size:12px;font-weight: 600;" id="cartAddText"></div>
+        <div style="color: #ffffff; font-size:12px;font-weight: 600;" id="categoryText"></div>
+      </div>
 
       <div id="background2">
         <div class="footer">
@@ -2716,7 +2719,9 @@ window.location.href = 'dash.html'
 
  
 
-
+function profile(){
+  window.location.href = "profile.html"
+}
 
 
  let allProducts = [];
@@ -2744,7 +2749,7 @@ window.location.href = 'dash.html'
 
                       <div style="width:100% margin-top:10px;">
                      <div style="width:50%; margin-left:50px; " >
-                            <img src="${element.images[0]}"  width="100%" height="100px" />  
+                            <img src="${element.images[Math.floor(Math.random()*5)]}"  width="100%" height="100px" />  
                         </div>
                     
                         <div style="margin-top:10px">
@@ -2822,29 +2827,72 @@ window.location.href = 'dash.html'
 
         fetchAllProducts();
 
-                    //add to cart 
   let cart = document.querySelectorAll(".theCart");
-
-let cartNum = localStorage.getItem("cartNo") || 0;
-
-let cartArray = JSON.parse(localStorage.getItem("cartArray")) || [];
+  
 
 let cartDiv = document.getElementById('cartDiv')
 let categoryText = document.getElementById('cartegoryText')
 let cartAddText = document.getElementById('cartAddText')
 
+// Function to update the cart number based on the current cart state in localStorage
+function updateCartNumber() {
+    cartArray = JSON.parse(localStorage.getItem("cartArray")) || [];
+    cartNum = cartArray.reduce((total, item) => total + item.itemQuantity, 0);
+    localStorage.setItem("cartNo", cartNum);
+    displayCartNumber();
+}
+
+// Function to display the cart number in UI
+function displayCartNumber() {
+    cart.forEach((c) => {
+        c.innerHTML = cartNum;
+    });
+}
+
+// Call the function to update the cart number initially
+updateCartNumber();
+
+// Function to display user information
+function displayUserInfo() {
+    let myname = document.getElementById('myname');
+    let myemail = document.getElementById('myemail');
+
+    firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+            myname.innerHTML = user.displayName.split(' ')[0] || '';
+            myemail.value = user.email || '';
+        } else {
+            window.location.href = 'login.html';
+        }
+    });
+}
+
+// Call the function to display user information
+displayUserInfo();
+
+// Function to sign out user
+let kangas = document.getElementById('kangas');
+kangas.addEventListener('click', function () {
+    firebase.auth().signOut().then(() => {
+        localStorage.removeItem('currentUser');
+        localStorage.removeItem('cartArray'); // Clear cart upon sign out
+        updateCartNumber(); // Update cart number upon sign out
+        window.location.href = 'index.html';
+    }).catch((error) => {
+        console.error(error);
+    });
+});
+
+// Function to add item to cart
 function showModal(event) {
     let el = event.target;
     let foundObj = products.find((obj) => el.id == obj.id);
 
-    // Check if the item is already in the cart
     let existingItemIndex = cartArray.findIndex((item) => item.itemTitle === foundObj.title);
 
     if (existingItemIndex !== -1) {
-        // If the item is already in the cart, increment its quantity
         cartArray[existingItemIndex].itemQuantity++;
     } else {
-        // If the item is not in the cart, add a new entry
         let item = {
             itemImage: foundObj.images[0],
             itemTitle: foundObj.title,
@@ -2854,55 +2902,15 @@ function showModal(event) {
             },
             itemAmount: foundObj.price,
         };
-
         cartArray.push(item);
     }
 
-    // Update localStorage with the modified cartArray
     localStorage.setItem("cartArray", JSON.stringify(cartArray));
-
-    // Update the cart count
-    cartNum = cartArray.reduce((total, item) => total + item.itemQuantity, 0);
-    localStorage.setItem("cartNo", cartNum);
-
-    // Display the updated cart count
-    displayCartNumber();
-
-    // The rest of your existing code for displaying messages, updating UI, etc.
+    updateCartNumber(); // Update cart number after adding item
 }
 
+showModal(event)
 
-
-        function displayCartNumber() {
-  cart.forEach((c) => {
-
-    c.innerHTML = cartNum;
-  });
-}
-displayCartNumber()
-
-    let myname = document.getElementById('myname')
-   
-    let myemail = document.getElementById('myemail')
-    function dispusers() {
-    firebase.auth().onAuthStateChanged((user) => {
-  if (user) {
-    // User is signed in, see docs for a list of available properties
-    // https://firebase.google.com/docs/reference/js/v8/firebase.User
-    var uid = user.uid;
-    console.log(user)
-    myname.innerHTML =`${user.displayName.toUpperCase()}`
-    name.innerHTML =`${user.displayName}`
-   
-    // ...
-  } else {
-    alert('you are not login ur page')
-
-    window.location.href = 'login.html'
-  }
-});
-}
-dispusers() 
 
 
 function signup() {
@@ -2938,5 +2946,38 @@ function home() {
 function myhome(){
 window.location.href = 'dash.html'
 }
+
+
+document.addEventListener('DOMContentLoaded', function () {
+  let mykongaimage = document.getElementById('mykongaimage')
+  let searchBar = document.getElementById('nav2')
+  let categories = document.getElementById('categories')
+window.addEventListener('scroll' , ()=> {  
+  
+
+  let windowHeight = window.scrollY
+
+   if(windowHeight > 100 ){
+          mykongaimage.style.display = 'none'
+          searchBar.style.transition = '1s'
+          categories.style.transition = '1s'
+          searchBar.style.top = '0px'
+          categories.style.top = '60px'
+       } else if (windowHeight < 100 ){
+        mykongaimage.style.display = 'flex'
+          searchBar.style.top = '40px'
+          categories.style.top = '100px'
+       }
+})  })
+
+if (currentUser && currentUser.displayName) {
+  let namme = currentUser.displayName.split(' ');
+
+  console.log(namme);
+
+  myname.innerHTML = namme[0] || '';
+  
+}
+
 </script>
 

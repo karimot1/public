@@ -1,182 +1,173 @@
 *{
-    margin:0;
-    padding:0;
+  margin:0;
+  padding:0;
 }
- .mykongaimage{
-width:100%;
-height:30px;
-background-color: #f6f6f6;
-justify-content:space-around;
-align-items: center;
-display: flex;
-}
-.mylogo{
-display:flex;
-flex-wrap: wrap;
-}
-.mylogo img{
-margin-top:6px;
+.mykongaimage{
+  width:100%;
+  height:30px;
+  background-color: #f6f6f6;
+  justify-content:space-evenly;
+  align-items: center;
+  display: flex;
 }
 .nav2{
-background-color: #ed017f;
-width:100%;
-height:60px;
-/* position:fixed; */
+  background-color: #ed017f;
+  width:100%;
+  height:60px;
+  /* position:fixed; */
 }
-.navbars{
-display: flex;
-flex-wrap: wrap;
-justify-content:space-around;
-align-items: center;
+.mylogo{
+  display:flex;
+  flex-wrap: wrap;
+}
+.mylogo img{
+  margin-top:6px;
 }
 .help{
-display:flex;
-flex-wrap: wrap;
+  display:flex;
+  flex-wrap: wrap;
+  text-decoration:none;
+    color:white;
+    font-size:13px;
+    font-weight:400;
+    font-family: "Helvetica Neue"-apple-systemBlinkMacSystemFont"Segoe UI"RobotoOxygenUbuntuCantarell"Fira Sans""Droid Sans"sans-serif;
 }
-
-
+  .help button:hover{
+    background-color:white;
+    color: #ed017f;
+  }
+.navbars{
+  display: flex;
+  flex-wrap: wrap;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
 .searchInput{
-display: flex;
-flex-wrap: wrap;
-justify-content: center;
-align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 }
+.searchInputs{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+#drop{
+  height:80vh;
+    width:100%;
+    background-color: #ffffff;
+    overflow-y:scroll;
+    position: absolute;
+    top:40px;
+    display:none;
+}
+#drop::-webkit-scrollbar{
+  display: none;
+}
+ .searchInput input{
+    height:40px;
+    width:450px;
+    border:0;
+    border-top-right-radius:0;
+     border-bottom-right-radius:0;
+     border-top-left-radius:5px;
+     border-bottom-left-radius:5px;
+     outline:0;
+  }
+  .searchInput button{
+     width:50px;
+     height:40px;
+    border-top-right-radius:5px;
+     border-bottom-right-radius:5px;
+     border-top-left-radius:0;
+     border-bottom-left-radius:0;
+     border:0;
+     background-color:#fba50a;
+  }
+  .store button{
+    width:120px;
+    height:60px;
+    background:none;
+    border:0;
+    color: #ffffff;
+    font-size:13px;
+    font-weight:400;
+    font-family: "Helvetica Neue"-apple-systemBlinkMacSystemFont"Segoe UI"RobotoOxygenUbuntuCantarell"Fira Sans""Droid Sans"sans-serif;
+  }
 
-.searchInput input{
-height:40px;
-width:500px;
-border:0;
-border-top-right-radius:0;
- border-bottom-right-radius:0;
- border-top-left-radius:5px;
- border-bottom-left-radius:5px;
- outline:0;
-}
-.searchInput button{
- width:50px;
- height:40px;
-border-top-right-radius:5px;
- border-bottom-right-radius:5px;
- border-top-left-radius:0;
- border-bottom-left-radius:0;
- border:0;
- background-color:#fba50a;
-}
-.store button{
-width:120px;
-height:60px;
-background:none;
-border:0;
-color: #ffffff;
-font-size:13px;
-font-weight:400;
-font-family: "Helvetica Neue"-apple-systemBlinkMacSystemFont"Segoe UI"RobotoOxygenUbuntuCantarell"Fira Sans""Droid Sans"sans-serif;
-}
-
-.store button:hover{
-background-color:white;
-color: #ed017f;
-}
-.mycart{
-width:140px;
-height:45px;
-margin-top:7px;
-display: flex;
-align-items:center;
-justify-content:space-around;
-background-color:#33b27b;
-/* margin-left:10px; */
-}
-.mycart button{
-width:25px;
-background:0;
-border:0;
-color: #ffffff;
-font-size:13px;
-font-weight:400;
-font-family: "Helvetica Neue"-apple-systemBlinkMacSystemFont"Segoe UI"RobotoOxygenUbuntuCantarell"Fira Sans""Droid Sans"sans-serif;
-}
-#addtocart{
-width:20px;
-height:30px;
-background-color: #f6f6f6;
-}
-.down{
-width:90px;
-height:60px;
-display: flex;
-align-items: center;
-position: relative;
-color: #ffffff;
-}
-.down:hover{
-background-color: #ffffff;
-color: #ed017f;
-}
-.Contact{
-width:200px;
-height:180px;
-background-color: #ffffff;
-box-shadow:3px 3px 3px 2px rgba(0, 0, 0, 0.247);
-position: absolute;
-top:60px;
-display:none;
-z-index:1;
-
-}
-#Account{
-width:200px;
-height:320px;
-background-color: #ffffff;
-box-shadow:3px 3px 3px 2px rgba(0, 0, 0, 0.247);
-position: absolute;
-top:90px;
-display:none;
-z-index:1;
-}
-.down:hover .Contact{
-display:block;
-
-}
-#login:hover #Account{
-display:block;
-
-}
-.konga{
-width:100%;
-height:40px;
-color:black;
-margin-top:5px;
-padding-left:10px;
-padding-top:5px;
-display: flex;
-font-size:13px;
-font-weight:400;
-font-family: "Helvetica Neue"-apple-systemBlinkMacSystemFont"Segoe UI"RobotoOxygenUbuntuCantarell"Fira Sans""Droid Sans"sans-serif;
-}
-.konganame{
-width:100%;
-height:40px;
-color:black;
-margin-top:5px;
-padding-left:10px;
-padding-top:5px;
-display: flex;
-font-size:20px;
-font-weight:400;
-font-family: "Helvetica Neue"-apple-systemBlinkMacSystemFont"Segoe UI"RobotoOxygenUbuntuCantarell"Fira Sans""Droid Sans"sans-serif;
-}
-.konganame span{
-margin-left:10px;
-}
-.konganame:hover{
-background-color:rgba(0, 0, 0, 0.171);
-color: #ed017f;
-}
-.konga:hover{
-background-color:rgba(0, 0, 0, 0.171);
-color: #ed017f;
-}
+  .store button:hover{
+    background-color:white;
+    color: #ed017f;
+  }
+  .mycart{
+    width:140px;
+    height:45px;
+    margin-top:7px;
+    display: flex;
+    align-items:center;
+    justify-content:space-around;
+    background-color:#33b27b;
+  }
+  .mycart button{
+    width:25px;
+    background:0;
+    border:0;
+    color: #ffffff;
+    font-size:13px;
+    font-weight:400;
+    font-family: "Helvetica Neue"-apple-systemBlinkMacSystemFont"Segoe UI"RobotoOxygenUbuntuCantarell"Fira Sans""Droid Sans"sans-serif;
+  }
+  #addtocart{
+    width:20px;
+    height:30px;
+    background-color: #f6f6f6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .down{
+    width:90px;
+    height:60px;
+   display: flex;
+   align-items: center;
+    position: relative;
+  }
+  .down:hover{
+    background-color: #ffffff;
+    color: #ed017f;
+  }
+  .Contact{
+    width:200px;
+    height:180px;
+    background-color: #ffffff;
+    box-shadow:3px 3px 3px 2px rgba(0, 0, 0, 0.247);
+    position: absolute;
+   top:60px;
+   display:none;
+   z-index:1;
+  }
+  .down:hover .Contact{
+    display:block;
+   
+  }
+  .konga{
+    width:100%;
+    height:40px;
+    color:black;
+    margin-top:5px;
+    padding-left:10px;
+    padding-top:5px;
+    font-size:13px;
+    font-weight:400;
+    font-family: "Helvetica Neue"-apple-systemBlinkMacSystemFont"Segoe UI"RobotoOxygenUbuntuCantarell"Fira Sans""Droid Sans"sans-serif;
+  }
+  .konga:hover{
+    background-color:rgba(0, 0, 0, 0.171);
+  }
 
 .material-symbols-outlined {
 font-variation-settings:
@@ -211,109 +202,86 @@ font-variation-settings:
 
 
 #login{
-width:130px;
-height:60px;
-margin-left:5px;
-padding-left:10px;
-padding-top:5px;
-font-size:13px;
-font-weight:400;
-color:#ffffff;
-font-family: "Helvetica Neue"-apple-systemBlinkMacSystemFont"Segoe UI"RobotoOxygenUbuntuCantarell"Fira Sans""Droid Sans"sans-serif;
-display: flex;
-justify-content:space-around;
-align-items: center;
+  width:130px;
+  height:60px;
+  margin-left:5px;
+  padding-left:10px;
+    padding-top:5px;
+    font-size:13px;
+    font-weight:400;
+    font-family: "Helvetica Neue"-apple-systemBlinkMacSystemFont"Segoe UI"RobotoOxygenUbuntuCantarell"Fira Sans""Droid Sans"sans-serif;
 }
 #login:hover{
-background-color: #ffffff;
-color: #ed017f;
+  background-color: #ffffff;
+  color: #ed017f;
 }
 .span{
-display: flex;
-flex-wrap: wrap;
-justify-content: space-around;
-height:20px;
-}
-.span button{
-background: none;
-border:0;
+  display: flex;
+  flex-wrap: wrap;
+  height:20px;
 }
 .span2{
-      display: flex;
-      flex-wrap: wrap;
-      height:20px;
-      align-items: center;
-      justify-content: space-around;
-      width:10%;
-      
-    }
+  display: flex;
+  flex-wrap: wrap;
+  height:20px;
+  align-items: center;
+  justify-content: space-around;
+  width:10%;
+}
+.span button{
+  background: none;
+  border:0;
+}
 .span2 button{
-background: none;
-border:0;
+  background: none;
+  border:0;
 }
 .nav3{
-width:100%;
-height:80px;
-background-color:white;
-position: fixed;
-box-shadow:3px 3px 3px 3px rgba(0, 0, 0, 0.082);
-display: flex;
-flex-wrap: wrap;
-justify-content: space-between;
-z-index:1;
+  width:100%;
+  height:80px;
+  background-color:white;
+  position: fixed;
+  box-shadow:3px 3px 3px 3px rgba(0, 0, 0, 0.082);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  z-index:1;
 }
 #input{
-width:100%;
-display:flex;
-justify-content: center;
-align-items: center;
-flex-wrap: wrap;
+  width:100%;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  position: relative;
+}
+#input:focus-within #drop{
+  display:block;
 }
 #input input{
-height:40px;
-width:91%;
-border:0;
-background-color:rgba(128, 128, 128, 0.425);
-border-top-right-radius:0;
- border-bottom-right-radius:0;
- border-top-left-radius:5px;
- border-bottom-left-radius:5px;
- outline:0;
-}
-#input button{
- width:8%;
- height:40px;
-border-top-right-radius:5px;
- border-bottom-right-radius:5px;
- border-top-left-radius:0;
- border-bottom-left-radius:0;
- border:0;
- background-color:#fba50a;
-}
-#nav5{
-width:100%;
-height:50px;
-position: fixed;
-bottom:0;
-background-color:#ffffff;
-box-shadow:3px 3px 3px 3px rgba(0, 0, 0, 0.164);
-display:none;
-z-index:1;
-}
-#menu{
-display: flex;
-justify-content:space-around;
-align-items: center;
-}
-#menu button{
-height:60px;
-background: none;
-border:0;
-line-height:7px;
-}
-#menu button:focus-within{
-color: #ed017f;
-}
+    height:40px;
+    width:91%;
+    border:0;
+    background-color:rgba(128, 128, 128, 0.425);
+    border-top-right-radius:0;
+     border-bottom-right-radius:0;
+     border-top-left-radius:5px;
+     border-bottom-left-radius:5px;
+     outline:0;
+  }
+  #input button{
+     width:8%;
+     height:40px;
+    border-top-right-radius:5px;
+     border-bottom-right-radius:5px;
+     border-top-left-radius:0;
+     border-bottom-left-radius:0;
+     border:0;
+     background-color:#fba50a;
+  }
+  .secondnavbar{
+    display:none;
+  }
 
 #categories{
 width:100%;
@@ -997,230 +965,6 @@ display:none;
     background-color:black;
   }
 
-.footer{
-width: 100%;
-height: fit-content;
-}
-.top{
-width: 100%;
-height: 13vh;
-background-color: rgb(46,46,46);
-display: flex;
-justify-content: center;
-align-items: center;
-}
-.top-flex{
-width: 95%;
-display: flex;
-justify-content: space-between;
-align-items: center;
-/* background-color: aqua; */
-}
-.long{
-display: flex;
-}
-.long button{
-width: 110px;
-height: 45px;
-padding: 10px;
-border: 0px;
-background-color: rgb(237,1,127);
-font-size: 15px;
-color: white;
-font-weight: bold;
-}
-.long input{
-width: 250px;
-height: 45px;
-padding: 10px;
-border: 0;
-font-size: 18px;
-font-family: 'Open Sans', sans-serif;
-outline: none;
-}
-
-.email{
-display: flex;
-justify-content: space-between;
-align-items: center;
-/* background-color: blue; */
-}
-
-.icon{
-width: 30px;
-height: 30px;
-border-radius: 100%;
-background-color: white;
-display: flex;
-justify-content: center;
-align-items: center;
-margin-right: 20px;
-}
-.text h2, .text1 h2{
-margin-top: 12px;
-}
-.text p, .text1 p{
-margin-top: -12px;
-}
-.text1{
-display: block;
-/* background-color: aqua; */
-}
-
-
-
-
-.bottom{
-width: 100%;
-height: 60vh;
-background-color: rgb(12,12,12);
-
-}
-.bottom-flex{
-display: flex;
-justify-content: center;
-align-items: center;
-}
-.flex{
-width: 95%;
-display: flex;
-justify-content: space-between;
-margin-top: 40px;
-/* align-items: center; */
-/* background-color: aqua; */
-}
-.about{
-width: 20%;
-/* background-color: aqua; */
-}
-
-.about h2, .email h2, .about1 h2{
-color: rgb(181,181,181);
-font-size: 15px;
-margin-bottom: 20px;
-}
-.about p, .email p, .about1 p{
-font-size: 12px;
-color: rgb(181,181,181);
-}
-.about p:hover, .about h2:hover{
-color: white;
-}
-.allabout{
-width: 65%;
-/* background-color: aqua; */
-display: flex;
-justify-content: space-between;
-}
-.download{
-margin: 0px, 0px, 60px, 0px;
-}
-.download h2{
-color: rgb(181,181,181);
-font-size: 15px;
-margin-bottom: 20px;
-font-weight: bold;
-}
-.apple{
-width: 150px;
-height: 42px;
-border-radius: 4px;
-background-color: black;
-display: flex;
-justify-content: space-evenly;
-align-items: center;
-color: white;
-}
-.flex-apple{
-width: 320px;
-display: flex;
-justify-content: space-between;
-/* background-color: aqua; */
-
-}
-.apple span{
-font-size: 10px;
-
-}
-.apple h4{
-font-size: 15px;
-font-weight: bold;
-}
-.connect{
-margin-top: 50px;
-}
-.icons{
-width: 65%;
-display: flex;
-justify-content: space-between;
-/* background-color: aqua; */
-}
-.circle{
-width: 40px;
-height: 40px;
-border-radius: 100%;
-background-color: rgb(51,51,51);
-display: flex;
-justify-content: center;
-align-items: center;
-}
-.circle:hover{
-background-color: white;
-cursor: pointer;
-}
-.facebook, .twitter, .youtube, .instagram{
-color: white;
-margin-top: 5px;
-}
-.facebook:hover, .twitter:hover{
-color: rgb(56,82,154);
-}
-.twitter:hover{
-color: rgb(3,164,236);
-}
-.instagram{
-margin: 0;
-}
-.instagram:hover{
-.f{
-display: none;
-}
-.k{
-display: block;
-}
-}
-.youtube:hover{
-color: rgb(247,0,0);
-}
-.f{
-display: block;
-}
-.k{
-display: none;
-}
-.last{
-width: 100%;
-/* background-color:   black; */
-margin-top: 40px;
-}
-.copy{
-width: 100%;
-/* background-color: red; */
-display: flex;
-justify-content: center;
-align-items: center;
-}
-.copy hr{
-width: 39%;
-color: white;
-border: 1px solid white;
-}
-.copy p{
-font-size: 12px;
-color: rgb(136,155,136);
-margin: 0px 7px;
-/* background-color: aqua; */
-}
 
 #soldItem{
     width:95%;
@@ -1489,3 +1233,227 @@ margin: 0px 7px;
         justify-content: center;
         align-items: center;
       }
+      .footer{
+        width: 100%;
+        height: fit-content;
+    }
+    .top{
+        width: 100%;
+        height: 13vh;
+        background-color: rgb(46,46,46);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .top-flex{
+        width: 95%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        /* background-color: aqua; */
+    }
+    .long{
+        display: flex;
+    }
+    .long button{
+        width: 110px;
+        height:50px;
+        padding: 10px;
+        border: 0px;
+        background-color: rgb(237,1,127);
+        font-size: 15px;
+        color: white;
+        font-weight: bold;
+    }
+    .long input{
+        width: 250px;
+        height:30px;
+        padding: 10px;
+        border: 0;
+        font-size: 18px;
+        font-family: 'Open Sans', sans-serif;
+        outline: none;
+    }
+    
+    .email{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        /* background-color: blue; */
+    }
+    
+    .icon{
+        width: 30px;
+        height: 30px;
+        border-radius: 100%;
+        background-color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 20px;
+    }
+    .text h2, .text1 h2{
+        margin-top: 12px;
+    }
+    .text p, .text1 p{
+        margin-top: -12px;
+    }
+    .text1{
+        display: block;
+        /* background-color: aqua; */
+    }
+    
+    
+    
+    
+    .bottom{
+        width: 100%;
+        height: 60vh;
+        background-color: rgb(12,12,12);
+        
+    }
+    .bottom-flex{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .flex{
+        width: 95%;
+        display: flex;
+        justify-content: space-between;
+        margin-top: 40px;
+        /* align-items: center; */
+        /* background-color: aqua; */
+    }
+    .about{
+        width: 20%;
+        /* background-color: aqua; */
+    }
+    
+    .about h2, .email h2, .about1 h2{
+        color: rgb(181,181,181);
+        font-size: 15px;
+        margin-bottom: 20px;
+    }
+    .about p, .email p, .about1 p{
+        font-size: 12px;
+        color: rgb(181,181,181);
+    }
+    .about p:hover, .about h2:hover{
+        color: white;
+    }
+    .allabout{
+        width: 65%;
+        /* background-color: aqua; */
+        display: flex;
+        justify-content: space-between;
+    }
+    .download{
+        margin: 0px, 0px, 60px, 0px;
+    }
+    .download h2{
+        color: rgb(181,181,181);
+        font-size: 15px;
+        margin-bottom: 20px;
+        font-weight: bold;
+    }
+    .apple{
+        width: 150px;
+        height: 42px;
+        border-radius: 4px;
+        background-color: black;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        color: white;
+    }
+    .flex-apple{
+        width: 320px;
+        display: flex;
+        justify-content: space-between;
+        /* background-color: aqua; */
+    
+    }
+    .apple span{
+        font-size: 10px;
+        
+    }
+    .apple h4{
+        font-size: 15px;
+        font-weight: bold;
+    }
+    .connect{
+        margin-top: 50px;
+    }
+    .icons{
+        width: 65%;
+        display: flex;
+        justify-content: space-between;
+        /* background-color: aqua; */
+    }
+    .circle{
+        width: 40px;
+        height: 40px;
+        border-radius: 100%;
+        background-color: rgb(51,51,51);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .circle:hover{
+        background-color: white;
+        cursor: pointer;
+    }
+    .facebook, .twitter, .youtube, .instagram{
+        color: white;
+        margin-top: 5px;
+    }
+    .facebook:hover, .twitter:hover{
+        color: rgb(56,82,154);
+    }
+    .twitter:hover{
+        color: rgb(3,164,236);
+    }
+    .instagram{
+        margin: 0;
+    }
+    .instagram:hover{
+       .f{
+        display: none;
+       }
+       .k{
+        display: block;
+       }
+    }
+    .youtube:hover{
+        color: rgb(247,0,0);
+    }
+    .f{
+        display: block;
+    }
+    .k{
+        display: none;
+    }
+    .last{
+        width: 100%;
+        /* background-color:   black; */
+        margin-top: 40px;
+    }
+    .copy{
+        width: 100%;
+        /* background-color: red; */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .copy hr{
+        width: 39%;
+        color: white;
+        border: 1px solid white;
+    }
+    .copy p{
+        font-size: 12px;
+        color: rgb(136,155,136);
+        margin: 0px 7px;
+        /* background-color: aqua; */
+    }

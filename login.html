@@ -8,7 +8,7 @@
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
         <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
     <style>
-        *{
+       *{
     margin: 0;
     padding: 0;
 }
@@ -120,13 +120,30 @@
 }
 
 
-input{
+
+input , #inputdiv{
     width: 350px;
     height: 45px;
     padding: 10px;
     outline: none;
     border: 1px solid rgba(0, 0, 0, 0.37);
     border-radius: 4px;
+}
+#inputdiv{
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.input2{
+    width: 250px;
+    border: none;
+    height: 40px;
+    padding: 0;
+    padding-left: 10px;
+    margin-bottom: 15px;
+  
 }
 
 input::placeholder {
@@ -286,10 +303,20 @@ input::placeholder {
                           <input id="email" placeholder="Enter email address OR Phone Number" type="text">
                       </label>
       
-                  <label id="password" for="">
-                      <h6>Password</h6>
-                      <input id="passwords" placeholder="Enter password" type="password" name="z" id="">
-                  </label>
+                      <label for="password">
+                        <h6 class="mt-2">Password</h6>
+                        <div id="inputdiv">
+                          <input
+                            id="password"
+                            class="input2"
+                            placeholder="Enter Password"
+                            type="password"
+                            name="z"
+                          />
+                          <small id="showButton" onclick="showPassword()" class="me-2"> </small>
+                        </div>
+                      </label>
+      
       
                   <button onclick="login()" id="loginButton">Login</button>
       
@@ -351,35 +378,52 @@ appId: "1:226093515382:web:04b3293079ef67b8705557"
     
   </script>
 <script>
-     let email  = document.getElementById('email')
-        let password = document.getElementById('passwords')
-        let currentUser
-       
-        let loginButton = document.getElementById('loginButton')
-        let account = document.getElementById('account')
-         function login(ev) {
-         loginButton.innerHTML  = ` <div class="text-center">
-         <div class="spinner-border" role="status">
-        <span class="visually-hidden">Loading...</span>
-                        </div>
-                    </div>`
+     let email = document.getElementById("email");
+  let password = document.getElementById("password");
+  let loginButton = document.getElementById("loginButton");
+  let showButton  = document.getElementById('showButton')
+  showButton.innerHTML = "show"
+  let show
+  let currentUse = JSON.parse(localStorage.getItem("currentUser"))
+  console.log(currentUse);
+  let currentUser;
+  function showPassword() {
+  
+    if (show == 1) {
+        password.type = "text"
+        
+    } else {
+        
+    }
+   
+  }
 
-          firebase.auth().signInWithEmailAndPassword(email.value, password.value)
+  function login() {
+    loginButton.innerHTML = `<div class="text-center">
+  <div class="spinner-border" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>`;
+
+firebase.auth().signInWithEmailAndPassword(email.value, password.value)
   .then((userCredential) => {
-    // Signed in 
+    loginButton.innerHTML = "Login";
     var user = userCredential.user;
-     currentUser = user.email
+    let currentUser = user
     alert('Login successful')
-    localStorage.setItem('currentUser', currentUser)
- window.location.href = "dashbroad.html"
+    localStorage.setItem('currentUser', JSON.stringify(currentUser))
+        window.location.href = 'dash.html'
   })
   .catch((error) => {
     var errorCode = error.code;
     var errorMessage = error.message;
-   alert(errorMessage)
-  loginButton.innerHTMl = 'login.html'
+    alert(errorMessage);
+    loginButton.innerHTML = "Login";
   });
+
+
 }
+console.log(currentUser)
 
 function sign() {
     account.innerHTML  = ` <div class="text-center">
